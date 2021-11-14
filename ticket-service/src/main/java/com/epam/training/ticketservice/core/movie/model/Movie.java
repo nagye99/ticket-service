@@ -18,6 +18,14 @@ public class Movie {
         return title;
     }
 
+    public String getGenre(){
+        return genre;
+    }
+
+    public int getLength(){
+        return length;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,6 +41,6 @@ public class Movie {
 
     @Override
     public String toString() {
-        return title + "(" + genre + ", " + length + " minutes)";
+        return title + " (" + genre + ", " + length + " minutes)";
     }
 }

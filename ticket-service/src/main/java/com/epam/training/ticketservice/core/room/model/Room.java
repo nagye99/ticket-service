@@ -36,6 +36,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room " + name + " with " + getChairsNumber() + " seats, " + rows + "rows and " + columns + "columns";
+        return "Room " + name + " with " + getChairsNumber() + " seats, " + rows + " rows and " + columns + " columns";
     }
 }
