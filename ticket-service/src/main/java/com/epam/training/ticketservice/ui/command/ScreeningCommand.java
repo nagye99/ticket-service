@@ -2,8 +2,7 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.room.RoomService;
-import com.epam.training.ticketservice.core.screening.Screening;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -22,8 +21,8 @@ public class ScreeningCommand {
     }
 
     @ShellMethod(key = "create screening", value = "Add screening to database")
-    public Screening createScreening(String movieName, String roomName, String date) throws ParseException {
-        return new Screening(movieService.getMovieByTitle(movieName).get(), roomService.getRoomByName(roomName).get(), new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+    public ScreeningDto createScreening(String movieName, String roomName, String date) throws ParseException {
+        return new ScreeningDto(movieService.getMovieByTitle(movieName).get(), roomService.getRoomByName(roomName).get(), new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
     }
 
     @ShellMethod(key = "delete screening", value = "Delete the given screening")
