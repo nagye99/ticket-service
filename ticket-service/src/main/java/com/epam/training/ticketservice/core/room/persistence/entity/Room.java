@@ -17,12 +17,11 @@ public class Room {
     @Column(unique = true)
     private String name;
     private Integer rows;
+    private Integer columns;
 
-    public Room(String name, Integer rows, Integer cols) {
+    public Room(String name, Integer rows, Integer columns) {
         this.name = name;
         this.rows = rows;
-        this.cols = cols;
+        this.columns = columns;
     }
-
-    private Integer cols;
 }

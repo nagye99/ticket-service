@@ -14,5 +14,5 @@ public interface MovieService {
 
     List<MovieDto> listMovies();
 
-    Optional<MovieDto> getMovieByTitle(String movieName);
+    Optional<MovieDto> getMovieByTitle(String title);
 }

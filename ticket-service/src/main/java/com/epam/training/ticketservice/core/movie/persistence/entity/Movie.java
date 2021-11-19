@@ -16,14 +16,12 @@ public class Movie {
     private Integer id;
     @Column(unique = true)
     private String title;
+    private String genre;
+    private Integer length;
 
-    public Movie(String title, String genre, int length) {
+    public Movie(String title, String genre, Integer length) {
         this.title = title;
         this.genre = genre;
         this.length = length;
     }
-
-    private String genre;
-    private int length;
-
 }

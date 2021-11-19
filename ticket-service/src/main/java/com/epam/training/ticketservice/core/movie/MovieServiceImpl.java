@@ -4,8 +4,8 @@ import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.entity.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.repository.MovieRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,12 +34,11 @@ public class MovieServiceImpl implements MovieService{
         return Optional.empty();
     }
 
-    @Transactional
     @Override
     public Optional<MovieDto> deleteMovie(String title) {
         Objects.requireNonNull(title, "Title of movie cannot be null during delete!");
         List<Movie> deletedMovies = movieRepository.deleteByTitle(title);
-        Optional<Movie> movie = deletedMovies.size() == 0 ? Optional.empty() : Optional.of(deletedMovies.get(0));
+        Optional<Movie> movie = deletedMovies.isEmpty() ? Optional.empty() : Optional.of(deletedMovies.get(0));
         return convertMovieEntityToMovieDto(movie);
     }
 

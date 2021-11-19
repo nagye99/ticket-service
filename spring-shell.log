@@ -32,3 +32,82 @@
 1637273099139:list movies
 1637273107273:delete movie Sátántangó
 1637273123173:list movies
+1637351337021:create movie "Sprited Away" animation 125
+1637351681618:create movie Sátántangó drama 450
+1637351695783:create movie "Sprited Away" animation 125
+1637351751096:list movies
+1637351912996:create movie Sátántangó drama 140
+1637351924287:create movie Nem no 50
+1637351929907:list movies
+1637351996265:create movie a a 120
+1637352004119:create movie bb30
+1637352013250:create movie b b 10
+1637352017384:list movies
+1637354716276:create room Piedone 5 3
+1637354730951:create room Cascade 15 68
+1637354736308:list rooms
+1637354811474:delete room Cascade
+1637354815339:list rooms
+1637354823385:delete room Piedone
+1637354826530:list rooms
+1637355331397:create movie Sátántangó drama 120
+1637355345441:delete movie Sátántangó
+1637355354522:list movies
+1637355364571:delete movie Hinl
+1637355372510:exit
+1637360786371:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637360816181:create movie "Spirited Away" drama 150
+1637360819197:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637360831869:create Pedersoli 10 15
+1637360843289:create room Pedersoli 10 15
+1637360849958:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637360861196:list screenings
+1637361346153:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637361362833:create movie ""pirited Away
+1637361380278:create movie "Spirited Away" drama 150
+1637361384582:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637361395888:create room Pedersoli 10 15
+1637361399654:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637361406084:list screenings
+1637361438717:create screening "\n\n\n\n\n\n"
+1637361484185:create screening "Spirited Away" Pedersoli "2021-04-15 15:00"
+1637361592112:delete screening Sátántangó Pedersoli ""
+1637361616163:delete screening Sátántangó Pedersoli "2021-04-15 15:00"
+1637361624947:list screenings
+1637361686054:delete screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637361695177:list screenings
+1637361875193:create movie ""
+1637361897104:create movie "Spirited Away" drama 150
+1637361905652:create Pedersoli 10 15
+1637361916049:create room Pedersoli 10 15
+1637361920502:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637361925614:list screenings
+1637363260583:create movie Sátántangó drama 150
+1637363272631:create movie ""pirited A
+1637363293661:create movie "Spirited Away" drama 120
+1637363313873:create room Pedersoli 10 15
+1637363321796:create room A 15 15
+1637363328606:list rooms
+1637363339880:list movies
+1637363344078:list screenings
+1637363375486:delete screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637363468100:create movie Sátántangó drama 150
+1637363479624:create movie "Spirited Away" drama 120
+1637363491208:create room Pedersoli 10 15
+1637363500676:create room A 15 15
+1637363510942:delete screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637363537905:create screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637363679582:stacktrace
+1637363769843:create movie Sátántangó drama 150
+1637363778655:create movie "Spirited Away" drama 120
+1637363788442:create room Pedersoli 10 15
+1637363798820:create room A 15 15
+1637363808246:delete screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637363815402:create screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637363825286:list screenings
+1637363863904:create screening Sátántangó A "2021-11-12 14:00"
+1637363890488:create screening "Spirited Away" A "2021-10-10 10:10"
+1637363897391:list screenings
+1637363945933:delete screening Sátántangó A "2021-10-15 10:10"
+1637363976826:delete screening Sátántangó A "2021-11-12 14:00"
+1637363986307:list screenings

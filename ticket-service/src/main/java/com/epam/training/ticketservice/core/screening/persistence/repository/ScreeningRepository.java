@@ -3,7 +3,14 @@ package com.epam.training.ticketservice.core.screening.persistence.repository;
 import com.epam.training.ticketservice.core.screening.persistence.entity.Screening;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
+    @Transactional
+    List<Screening> deleteByMovieTitleAndRoomNameAndDate(String movieTitle, String roomName, LocalDateTime date);
 }

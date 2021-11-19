@@ -1,12 +1,21 @@
 package com.epam.training.ticketservice.core.room.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@Builder
 public class RoomDto {
     private final String name;
     private final Integer rows;
     private final Integer columns;
+
+    private Integer getChairsNumber() {
+        return rows * columns;
+    }
+
+    public String toString(){
+        return "Room " + name + " with " + getChairsNumber() + " seats, " + rows + " rows and " + columns + " columns";
+    }
 }

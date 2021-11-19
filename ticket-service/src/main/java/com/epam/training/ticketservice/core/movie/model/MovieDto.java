@@ -1,11 +1,9 @@
 package com.epam.training.ticketservice.core.movie.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 @Builder
 public class MovieDto {
 
