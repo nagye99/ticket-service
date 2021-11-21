@@ -111,3 +111,131 @@
 1637363945933:delete screening Sátántangó A "2021-10-15 10:10"
 1637363976826:delete screening Sátántangó A "2021-11-12 14:00"
 1637363986307:list screenings
+1637411467651:create movie Sátántangó drama 450
+1637411477767:create room Pedersoli 10 15
+1637411512752:create scrrening Sátántangó Pedersoli "\n"
+1637411543100:create screening Sátántangó Pedersoli "15-12-17 15:00"
+1637411620555:create room Pedersoli 10 15
+1637411633047:create movie Sátántangó drama 450
+1637411665210:create screening Sátántangó Pedersoli "15-12-17 15:00"
+1637414276066:list movies
+1637414281277:list rooms
+1637414286439:list screenings
+1637414307546:delete screening Sátántangó Loumier "2021-11-12 15:00"
+1637414314301:list screenings
+1637414331074:elete screening Sátántangó Loumier "2021-11-15 20:00"
+1637414342910:delete screening Sátántangó Loumier "2021-11-15 20:00"
+1637414353078:list screenings
+1637414385753:delete screening Interstaller A "2021-11-15 20:00"
+1637414390014:exit
+1637414848397:create movie null drama 150
+1637415285017:list movies
+1637415293273:delete movie Sátántangó
+1637415298478:list movies
+1637415302895:list screenings
+1637415315965:stacktrace
+1637415534250:create screening "Spirited Away" Pedersoli "2021-12-12 20:00"
+1637415544887:list movies
+1637415575060:delete movie "Spirited Away"
+1637415593874:list movies
+1637415639604:create screening "Spirited away" Pedersoli "2021-12-1220:00"
+1637415659896:create screening "Spirited away" Pedersoli "2021-12-12 20:00"
+1637415672197:list screenings
+1637415684106:delete movie "Spirited away"
+1637415690440:list screenings
+1637415783273:delete screening "Spirited away" Pedersoli "2021-12-12 20:00"
+1637415824281:list screenings
+1637415853361:create movie "Spirited away" drama 15
+1637415867165:create screening "Spirited away" Pedersoli "2021-12-12 20:00"
+1637415877309:list screenings
+1637415957272:delete movie "Spirited away"
+1637415964181:list movies
+1637415981781:list screenings
+1637415986612:stacktrace
+1637416304104:create screening "Spirited away" Pedersoli "2021-11-11 11:11"
+1637416309132:list screenings
+1637416329564:delete movie "Spirited away"
+1637416333694:list screenings
+1637416395144:delete screening "Spirited away" Pedersoli "2021-11-11 11:11"
+1637416435298:delete screening "Sátántangó" Loumier ""1-11-11 11:11"\n"
+1637416459059:delete screening Sátántangó Loumier "21-11-11 11:11"
+1637416544430:delete screening Sátántangó Loumier "2021-11-15 20:00"
+1637416600440:delete screening Sátántangó Pedersoli "20-11-15 11:11"
+1637416635441:create screening "Spirited away" Pedersoli "21-11-11 11:11"
+1637417312253:create screening "Spirited away" Pedersoli "2021-11-12 15:00"
+1637417322592:delete movie "Spirited away"
+1637417333010:list screenings
+1637417371080:delete screening "Spirited away" Pedersoli "2021-11-12 15:00"
+1637417377239:list screenings
+1637417395672:create movie "Spirited away" drama 150
+1637417411639:create screening "Spirited away" Pedersoli "2021-11-12 15:00"
+1637417433324:delete movie "Spirited away"
+1637417439659:list screenings
+1637417448221:create movie "Spirited away" drama 150
+1637417456055:list screenings
+1637417461180:exit
+1637441763910:create screening "Spirited away" Pedersoli "2021-11-12 11:12"
+1637441830669:create screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637441922369:create screening Sátántango Pedersoli "2021-12-12 15:00"
+1637441951346:create screening Sátántangó Pedersoli "2021-12-12 15:00"
+1637442098748:create screening Sátántangó Pedersoli "2021-10-15 12:00"
+1637443590694:create screening Sátántangó Pedersoli "2021-11-11 11:11"
+1637445597465:list movies
+1637450210218:list screenings
+1637450318495:create screening Sátántangó Loumier "2021-11-16 03:00"
+1637450340033:stacktrace
+1637450386262:create screening Sátántangó Loumier "2021-11-16 03:30"
+1637451223108:list movies
+1637451232329:list screenings
+1637451246589:create Screening ""pirited
+1637451281952:screate Screening "Spirited away" Pedersoli "2021-12-12 12:00"
+1637451291224:create Screening "Spirited away" Pedersoli "2021-12-12 12:00"
+1637451306058:cerate screening "Spirited away" Pedersoli "2021-12-12 12:00"
+1637451315309:create screening "Spirited away" Pedersoli "2021-12-12 12:00"
+1637451393979:create screening Sátántangó Pedersoli "2021-12-12 13:15"
+1637451513190:create movie A drama 10
+1637451522671:create room B 10 15
+1637451555929:create screening A B "2021-12-12 12:00"
+1637451573896:create screening A B "2021-12-12 12:10"
+1637451588918:create screening A B "2021-12-12 12:11"
+1637451606523:list screenings
+1637451615748:list movies
+1637451652143:create screening A B "2021-12-12 12:12"
+1637451668243:create screening A B "2021-12-12 13:00"
+1637451680128:create screening A B "2021-12-12 12:01"
+1637451686647:list screenings
+1637451702473:create screening A B "2021-12-12 12:05"
+1637451714541:create screening A B "2021-12-12 12:5"
+1637452914138:create movie A drama 60
+1637452925658:create room Ro 10 15
+1637452984733:create screening A Ro "2021-11-10 15:00"
+1637453302628:create screening "Spirited away" Pedersoli "2021-11-12 19:00"
+1637453405942:create screening "Spirited away" Pedersoli "2021-11-12 22:30"
+1637453420080:create screening "Spirited away" Pedersoli "2021-11-12 22:31"
+1637453431850:create screening "Spirited away" Pedersoli "2021-11-12 22:40"
+1637453439146:create screening "Spirited away" Pedersoli "2021-11-12 22:50"
+1637453650594:list screenings
+1637453703815:create screenings "Spirited away" Loumier "2021-11-16 03:00"
+1637453724354:create screening "Spirited away" Loumier "2021-11-16 03:00"
+1637453741971:create screening "Spirited away" Loumier "2021-11-16 03:30"
+1637453749623:list movies
+1637453757861:list screenings
+1637453975118:create screening Sátántangó Pedersoli "2021-11-12 10:00"
+1637454261912:create screening "Spirited away" Pedersoli "2021-11-16 03:15"
+1637454291767:create screening "Spirited away" Loumier "2021-11-16 03:15"
+1637454303012:create screening "Spirited away" Loumier "2021-11-16 03:30"
+1637454308421:create screening "Spirited away" Loumier "2021-11-16 03:31"
+1637454316163:create screening "Spirited away" Loumier "2021-11-16 03:40"
+1637454320118:create screening "Spirited away" Loumier "2021-11-16 03:41"
+1637454341533:create screening "Spirited away" Loumier "2021-11-15 15:00"
+1637454359443:create screening "Spirited away" Loumier "2021-11-15 19:00"
+1637454372418:create screening "Spirited away" Loumier "2021-11-15 18:45"
+1637454404804:create screening "Spirited away" Loumier "2021-11-15 18:44"
+1637454492468:create screening "Spirited away Lomier "2021-11-15 18:44"\n"
+1637454522387:create screening "Spirited away" Loumier "2021-11-15 18:44"
+1637454533449:create screening "Spirited away" Loumier "2021-11-15 18:40"
+1637454540051:create screening "Spirited away" Loumier "2021-11-15 18:39"
+1637454550918:create screening "Spirited away" Loumier "2021-11-15 18:35"
+1637454557362:create screening "Spirited away" Loumier "2021-11-15 18:34"
+1637457269769:sign up privileged eniko
+1637457279176:sign in privileged eniko

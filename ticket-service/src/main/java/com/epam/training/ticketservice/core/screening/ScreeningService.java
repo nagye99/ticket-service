@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ScreeningService {
     void addScreening(ScreeningDto screeningDto);
 
-    Optional<ScreeningDto> deleteScreening(String movieTitle, String roomName, LocalDateTime date) throws IllegalArgumentException;
+    Optional<ScreeningDto> deleteScreening(String movieTitle, String roomName, LocalDateTime date);
 
     List<ScreeningDto> listScreenings();
 }

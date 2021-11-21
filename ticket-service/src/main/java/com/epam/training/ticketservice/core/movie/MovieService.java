@@ -15,4 +15,6 @@ public interface MovieService {
     List<MovieDto> listMovies();
 
     Optional<MovieDto> getMovieByTitle(String title);
+
+    long getMinutes(String title);
 }

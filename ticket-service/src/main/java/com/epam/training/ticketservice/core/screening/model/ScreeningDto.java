@@ -5,7 +5,6 @@ import com.epam.training.ticketservice.core.room.model.RoomDto;
 import lombok.Builder;
 import lombok.Data;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

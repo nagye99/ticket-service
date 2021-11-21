@@ -52,6 +52,16 @@ public class MovieServiceImpl implements MovieService{
         return convertMovieEntityToMovieDto(movieRepository.findByTitle(movieName));
     }
 
+    public long getMinutes(String title){
+        Optional<Movie> movieOptional = movieRepository.findByTitle(title);
+        if(movieOptional.isPresent()){
+            Movie movie = movieOptional.get();
+            return movie.getLength();
+        }
+        throw new NullPointerException();
+    }
+
+
     private MovieDto convertMovieEntityToMovieDto(Movie movie){
         return MovieDto.builder().title (movie.getTitle()).genre(movie.getGenre()).length(movie.getLength()).build();
     }
