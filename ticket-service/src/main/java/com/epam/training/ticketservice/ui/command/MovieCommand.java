@@ -18,13 +18,13 @@ public class MovieCommand {
         this.movieService = movieService;
     }
 
-    @ShellMethod(key = "create movie", value ="Add movie to database")
+    @ShellMethod(key = "create movie", value = "Add movie to database")
     public String createMovie(String title, String genre, int length) {
-        try{
+        try {
             MovieDto movie = MovieDto.builder().title(title).genre(genre).length(length).build();
             movieService.addMovie(movie);
             return movie + " added to database.";
-        }catch(Exception e){
+        } catch (Exception e) {
             return "Unsuccessful creating. The movie is already in the database.";
         }
     }
@@ -37,7 +37,7 @@ public class MovieCommand {
     @ShellMethod(key = "delete movie", value = "Delete the given movie")
     public String deleteMovie(String title) {
         Optional<MovieDto> movieDto = movieService.deleteMovie(title);
-        if(movieDto.isPresent()){
+        if (movieDto.isPresent()) {
             return movieDto.get() + " deleted.";
         }
         return "The movie doesn't exist in the database.";

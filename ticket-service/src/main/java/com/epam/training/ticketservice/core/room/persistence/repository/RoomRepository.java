@@ -10,7 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
+
     @Transactional
     List<Room> deleteByName(String name);
+
     Optional<Room> findByName(String name);
 }

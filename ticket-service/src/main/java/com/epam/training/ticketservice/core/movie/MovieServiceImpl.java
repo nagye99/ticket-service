@@ -4,7 +4,6 @@ import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.entity.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.repository.MovieRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
@@ -52,9 +51,9 @@ public class MovieServiceImpl implements MovieService{
         return convertMovieEntityToMovieDto(movieRepository.findByTitle(movieName));
     }
 
-    public long getMinutes(String title){
+    public long getMinutes(String title) {
         Optional<Movie> movieOptional = movieRepository.findByTitle(title);
-        if(movieOptional.isPresent()){
+        if (movieOptional.isPresent()) {
             Movie movie = movieOptional.get();
             return movie.getLength();
         }
@@ -62,11 +61,11 @@ public class MovieServiceImpl implements MovieService{
     }
 
 
-    private MovieDto convertMovieEntityToMovieDto(Movie movie){
-        return MovieDto.builder().title (movie.getTitle()).genre(movie.getGenre()).length(movie.getLength()).build();
+    private MovieDto convertMovieEntityToMovieDto(Movie movie) {
+        return MovieDto.builder().title(movie.getTitle()).genre(movie.getGenre()).length(movie.getLength()).build();
     }
 
-    private  Optional<MovieDto> convertMovieEntityToMovieDto(Optional<Movie> movie){
+    private  Optional<MovieDto> convertMovieEntityToMovieDto(Optional<Movie> movie) {
         return movie.isEmpty() ? Optional.empty() : Optional.of(convertMovieEntityToMovieDto(movie.get()));
     }
 }

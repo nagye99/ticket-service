@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MovieService {
+
     void addMovie(MovieDto movieDto);
 
     Optional<MovieDto> updateMovie(String title, String genre, Integer length);

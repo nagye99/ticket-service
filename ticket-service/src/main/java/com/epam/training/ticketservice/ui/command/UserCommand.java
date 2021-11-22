@@ -22,14 +22,14 @@ public class UserCommand {
         Optional<UserDto> userDto = userService.getLoggedInUser();
         if (userDto.isEmpty()) {
             return "You are not signed in";
-        }else if(userDto.get().getRole() == User.Role.ADMIN){
+        } else if (userDto.get().getRole() == User.Role.ADMIN) {
             return "Signed in with privileged account " + userDto.get().getUsername();
         }
         return "Signed in with account " + userDto.get().getUsername();
     }
 
     @ShellMethod(key = "sign up", value = "Sign up new account")
-    public String signUp(String userName, String password){
+    public String signUp(String userName, String password) {
         try {
             userService.signUp(userName, password);
             return "Registration was successful!";
@@ -38,7 +38,7 @@ public class UserCommand {
         }
     }
 
-    @ShellMethod(key = "sign in", value ="Sign in")
+    @ShellMethod(key = "sign in", value = "Sign in")
     public String signIn(String username, String password) {
         Optional<UserDto> user = userService.signIn(username, password);
         if (user.isEmpty() || user.get().getRole() == User.Role.ADMIN) {

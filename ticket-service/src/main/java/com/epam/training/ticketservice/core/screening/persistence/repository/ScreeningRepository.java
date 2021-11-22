@@ -7,10 +7,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
+
     @Transactional
     List<Screening> deleteByMovieTitleAndRoomNameAndDate(String movieTitle, String roomName, LocalDateTime date);
+
     List<Screening> findByRoomName(String name);
+
+    Optional<Screening> getScreeningByMovieTitleAndRoomNameAndDate(String movieTitle, String roomName, LocalDateTime date);
 }

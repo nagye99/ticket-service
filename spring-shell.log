@@ -239,3 +239,77 @@
 1637454557362:create screening "Spirited away" Loumier "2021-11-15 18:34"
 1637457269769:sign up privileged eniko
 1637457279176:sign in privileged eniko
+1637518371891:list screenings
+1637518446566:book Sátántangó Pedersoli "2021-11-12 15:00" 5,5 12,10
+1637518470751:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 12,10"
+1637518532715:help
+1637518601750:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 12,10"
+1637518611259:stacktrace
+1637518636102:sign up eniko eniko
+1637518643191:log in eniko eniko
+1637518652377:sign in eniko eniko
+1637518660375:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 12,10"
+1637518670190:stacktrace
+1637534732886:sign up eniko eniko
+1637534738669:sign in eniko eniko
+1637534770350:book Sátánatangó hsn "2021-11\n"
+1637534795916:book Sátántangó hsn "2021-11-14 14:00" "5,5 10,12"
+1637534856803:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637534870973:stacktrace
+1637535031069:list screenings
+1637535042565:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637567547235:stacktrace
+1637567563139:sign up admin admin
+1637567569435:sign in admin admin
+1637567571478:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637567581319:stracktrace
+1637567596072:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637567599961:stacktrace
+1637567716840:sign up admin admin
+1637567723313:sign in admin admin
+1637567725115:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637567828346:sign up admin admin
+1637567833108:sign up a a
+1637567838865:sign in a a
+1637567844982:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637567886466:sign up a a
+1637567891044:sign in a a
+1637567893764:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637567962198:sign up a a
+1637567967602:sign in a a
+1637567970063:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637568533814:sign up a a
+1637568539229:sign in a a
+1637568541113:Integer rows = room.getRows();
+1637568558210:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637568593705:stacktrace
+1637569329613:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637569641756:sign up a a
+1637569645892:sign in a
+1637569651606:sign in a a
+1637569656496:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637569673554:list rooms
+1637569695036:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,16\n"
+1637569798460:sign up a a
+1637569802112:sign in  a a
+1637569827937:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637569842499:list screenings
+1637569868892:create screening "Spirited away" Loumier "2021-02-15 16:00"
+1637569875651:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637570247914:sign up a a
+1637570252730:sign in a a
+1637570268900:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637570291660:book Sátántangó oudbf "2021-11-12 15:00" "5,5 10,12"
+1637570298960:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637570350658:sign up a a
+1637570354745:sign in a a
+1637570357227:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637570368973:book Sátántangó Loumier "2021-11-12 15:00" "5,5 10,12"
+1637570385438:list screenings
+1637570388539:list rooms
+1637570431272:book Sátántangó Loumier "2021-11-15 20:00" "5,5 21,6"
+1637570444980:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,16"
+1637570635229:sign up a a
+1637570640526:sign in a a
+1637570642815:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637570662207:book Sátántangó Pedeoiabkcji "2021-11-12 15:00" "5,5 10,12"

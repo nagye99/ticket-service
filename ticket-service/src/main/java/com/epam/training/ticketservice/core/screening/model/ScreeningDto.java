@@ -18,6 +18,6 @@ public class ScreeningDto {
 
     @Override
     public String toString() {
-        return movie.getTitle() + " (" + movie .getGenre() + ", " + movie.getLength() + " minutes), screened in room " + room.getName() + ", at " + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return movie.getTitle() + " (" + movie.getGenre() + ", " + movie.getLength() + " minutes), screened in room " + room.getName() + ", at " + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

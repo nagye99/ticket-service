@@ -4,7 +4,6 @@ import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.entity.Room;
 import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -52,11 +51,11 @@ public class RoomServiceImpl implements RoomService {
         return convertRoomEntityToRoomDto(roomRepository.findByName(name));
     }
 
-    private RoomDto convertRoomEntityToRoomDto(Room room){
-        return RoomDto.builder().name (room.getName()).rows(room.getRows()).columns(room.getColumns()).build();
+    private RoomDto convertRoomEntityToRoomDto(Room room) {
+        return RoomDto.builder().name(room.getName()).rows(room.getRows()).columns(room.getColumns()).build();
     }
 
-    private  Optional<RoomDto> convertRoomEntityToRoomDto(Optional<Room> room){
+    private  Optional<RoomDto> convertRoomEntityToRoomDto(Optional<Room> room) {
         return room.isEmpty() ? Optional.empty() : Optional.of(convertRoomEntityToRoomDto(room.get()));
     }
 }
