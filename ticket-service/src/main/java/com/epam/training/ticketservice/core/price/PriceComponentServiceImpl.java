@@ -1,8 +1,12 @@
 package com.epam.training.ticketservice.core.price;
 
+import com.epam.training.ticketservice.core.price.model.PriceComponentDto;
+import com.epam.training.ticketservice.core.price.persistence.entity.PriceComponent;
+import com.epam.training.ticketservice.core.price.persistence.repository.PriceComponentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PriceComponentServiceImpl implements PriceComponentService{
@@ -23,5 +27,18 @@ public class PriceComponentServiceImpl implements PriceComponentService{
     @Override
     public void updateBasePrice(Integer price) {
 
+    }
+
+    @Override
+    public Optional<PriceComponentDto> getComponentByName(String componentName) {
+        return convertPriceComponentEntityToPriceComponentDto(priceComponentRepository.findByName(componentName));
+    }
+
+    private PriceComponentDto convertPriceComponentEntityToPriceComponentDto(PriceComponent priceComponent) {
+        return PriceComponentDto.builder().name(priceComponent.getName()).price(priceComponent.getPrice()).build();
+    }
+
+    private  Optional<PriceComponentDto> convertPriceComponentEntityToPriceComponentDto(Optional<PriceComponent> priceComponent) {
+        return priceComponent.isEmpty() ? Optional.empty() : Optional.of(convertPriceComponentEntityToPriceComponentDto(priceComponent.get()));
     }
 }

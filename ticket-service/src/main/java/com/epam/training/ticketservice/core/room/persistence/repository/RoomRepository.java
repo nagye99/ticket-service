@@ -15,4 +15,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     List<Room> deleteByName(String name);
 
     Optional<Room> findByName(String name);
+
+
 }

@@ -100,10 +100,6 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .map(screen -> List.of(screen.getDate(), screen.getDate()
                         .plusMinutes(movieService.getMinutes(screen.getMovieTitle()))))
                 .collect(Collectors.toList());
-        screenings.stream()
-                .map(screen -> List.of(screen.getDate(), screen.getDate()
-                        .plusMinutes(movieService.getMinutes(screen.getMovieTitle()))))
-                .forEach(System.out::println);
         LocalDateTime currentMovieEnd = screening.getDate().plusMinutes(movieService.getMinutes(screening.getMovieTitle()));
         return moviesStartAndEnd
                 .stream()

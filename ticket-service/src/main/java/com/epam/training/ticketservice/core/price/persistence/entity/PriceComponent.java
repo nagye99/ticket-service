@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.core.price;
+package com.epam.training.ticketservice.core.price.persistence.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -54,7 +54,7 @@ public class UserCommand {
         if (user.isEmpty() || user.get().getRole() == User.Role.USER) {
             return "Login failed due to incorrect credentials";
         }
-        return user.get() + " is logged in!";
+        return user.get().getUsername() + " is logged in!";
     }
 
     @ShellMethod(key = "sign out", value = "Sign out")

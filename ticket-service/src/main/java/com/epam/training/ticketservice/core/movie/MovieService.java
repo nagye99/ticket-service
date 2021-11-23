@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.core.movie;
 
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ public interface MovieService {
     List<MovieDto> listMovies();
 
     Optional<MovieDto> getMovieByTitle(String title);
+
+    Integer getMovieId(String title);
 
     long getMinutes(String title);
 }

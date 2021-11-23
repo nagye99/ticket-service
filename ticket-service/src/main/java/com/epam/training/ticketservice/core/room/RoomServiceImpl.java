@@ -51,6 +51,16 @@ public class RoomServiceImpl implements RoomService {
         return convertRoomEntityToRoomDto(roomRepository.findByName(name));
     }
 
+    @Override
+    public Integer getRoomId(String name) {
+        Optional<Room> room =
+                roomRepository.findByName(name);
+        if (room.isPresent()) {
+            return room.get().getId();
+        }
+        throw new NullPointerException("The room doesn't exist.");
+    }
+
     private RoomDto convertRoomEntityToRoomDto(Room room) {
         return RoomDto.builder().name(room.getName()).rows(room.getRows()).columns(room.getColumns()).build();
     }

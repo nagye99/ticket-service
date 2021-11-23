@@ -51,6 +51,16 @@ public class MovieServiceImpl implements MovieService {
         return convertMovieEntityToMovieDto(movieRepository.findByTitle(movieName));
     }
 
+    @Override
+    public Integer getMovieId(String title) {
+        Optional<Movie> movie =
+                movieRepository.findByTitle(title);
+        if (movie.isPresent()) {
+            return movie.get().getId();
+        }
+        throw new NullPointerException("The movie doesn't exist.");
+    }
+
     public long getMinutes(String title) {
         Optional<Movie> movieOptional = movieRepository.findByTitle(title);
         if (movieOptional.isPresent()) {

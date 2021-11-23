@@ -324,3 +324,41 @@
 1637617401279:sign out
 1637617408656:describe account
 1637617441402:exit
+1637693971653:sign in privileged admin admin
+1637693981611:create room Pedersoli 20 10
+1637693990645:create room Girotti 10 10
+1637694000302:create movie Sátántangó drama 450
+1637694007049:create movie \\"Spirited Away\\" animation 125
+1637694025223:create movie "Spirited Away" animation 125
+1637694033147:sign out
+1637694058903:sign in privileged admin admin
+1637694082228:create screening Sátántangó Pedersoli "2021-03-15 10:45"
+1637694104791:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637694200890:list screenings
+1637694395765:sign in privileged admin admin
+1637694437903:exit
+1637708210934:create room Pedersoli 20 10
+1637708224485:create room Girotti 10 10
+1637708225938:create movie Sátántangó drama 450
+1637708238413:create movie "Spirited Away" aminmation 125
+1637708251378:create movie "Pulp Fiction" drama 154
+1637708262678:create screening Sátántangó Pedersoli "2021-03-15 10:45"
+1637708291525:create screening \\"Spirited Away" Pedersoli "2021-03-14 16:00"\n\n\n"
+1637708305373:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637708321425:create screening "Pulp Fiction" Girotti "2021-03-14 16:00"
+1637708328647:sign out
+1637708357637:create price component additionalFeeForSatantango 100
+1637708444474:create room Pedersoli 20 10
+1637708453311:create room Girotti 10 10
+1637708463629:create movie Sátántangó drama 450
+1637708477514:create movie "Spirited Away" aminmation 125
+1637708490338:create movie "Pulp Fiction" drama 154
+1637708502795:create screening Sátántangó Pedersoli "2021-03-15 10:45"
+1637708518640:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1637708535712:create screening "Pulp Fiction" Girotti "2021-03-14 16:00"
+1637708554985:create price component additionalFeeForSatantango 100
+1637708565146:attach price component to movie additionalFeeForSatantango Sátántangó
+1637708583288:create price component additionalFeeForPedersoli 100
+1637708619683:attach price component to room additionalFeeForPedersoli Pedersoli
+1637708639017:create price component additionalFeeForPulpFictionScreening 100
+1637708659050:attach price component to screening additionalFeeForPulpFictionScreening "Pulp Fiction" Girotti "2021-03-14 16:00"

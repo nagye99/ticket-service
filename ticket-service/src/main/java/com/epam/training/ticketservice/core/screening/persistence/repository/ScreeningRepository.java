@@ -19,4 +19,6 @@ public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
 
     Optional<Screening> getScreeningByMovieTitleAndRoomNameAndDate
             (String movieTitle, String roomName, LocalDateTime date);
+
+    Screening getById(Integer id);
 }

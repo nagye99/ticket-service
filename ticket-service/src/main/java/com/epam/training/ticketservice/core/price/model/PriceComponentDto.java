@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.core.price;
+package com.epam.training.ticketservice.core.price.model;
 
 import lombok.Builder;
 import lombok.Data;

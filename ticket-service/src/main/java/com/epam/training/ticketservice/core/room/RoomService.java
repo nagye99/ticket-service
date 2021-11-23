@@ -16,4 +16,6 @@ public interface RoomService {
     List<RoomDto> listRooms();
 
     Optional<RoomDto> getRoomByName(String name);
+
+    Integer getRoomId(String name);
 }
