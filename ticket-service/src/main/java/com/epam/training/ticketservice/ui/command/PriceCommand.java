@@ -1,8 +1,16 @@
 package com.epam.training.ticketservice.ui.command;
 
+import com.epam.training.ticketservice.core.price.PriceComponentDto;
+import com.epam.training.ticketservice.core.price.PriceComponentService;
 import org.springframework.shell.standard.ShellMethod;
 
 public class PriceCommand {
+
+    private final PriceComponentService priceComponentService;
+
+    public PriceCommand(PriceComponentService priceComponentService) {
+        this.priceComponentService = priceComponentService;
+    }
 
     @ShellMethod(key = "update base price", value = "Updating base price")
     public String updateBasePrice(int price) {
@@ -11,7 +19,13 @@ public class PriceCommand {
 
     @ShellMethod(key = "create price component", value = "Creating a new price component")
     public String createPriceComponent(String componentName, int price) {
-        return componentName + " " + price;
+        try {
+            PriceComponentDto priceComponentDto = PriceComponentDto.builder().name(componentName).price(price).build();
+            priceComponentService.savePriceComponent(priceComponentDto);
+            return priceComponentDto + " is added to database.";
+        } catch (Exception e) {
+            return "The component is already exists.";
+        }
     }
 
     @ShellMethod(key = "attach price component to room", value = "Price component attach to room")

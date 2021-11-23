@@ -10,7 +10,6 @@ import com.epam.training.ticketservice.core.user.model.UserDto;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -26,7 +25,9 @@ public class BookingCommand {
     private final ScreeningService screeningService;
 
 
-    public BookingCommand(BookingService bookingService, UserService userService, MovieService movieService, RoomService roomService, ScreeningService screeningService) {
+    public BookingCommand
+            (BookingService bookingService, UserService userService,
+             MovieService movieService, RoomService roomService, ScreeningService screeningService) {
         this.bookingService = bookingService;
         this.userService = userService;
         this.movieService = movieService;
@@ -38,7 +39,9 @@ public class BookingCommand {
     public String book(String movieTitle, String roomName, String date, String seats) {
         try {
             UserDto user = userService.getLoggedInUser().get();
-            Optional<ScreeningDto> screeningDto = screeningService.getScreeningByTitleRoomAndDate(movieTitle, roomName, LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            Optional<ScreeningDto> screeningDto = screeningService
+                    .getScreeningByTitleRoomAndDate(movieTitle, roomName, LocalDateTime
+                            .parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
             if (screeningDto.isPresent()) {
                 String message = bookingService.bookSeats(user, screeningDto.get(), seats);
                 return message;

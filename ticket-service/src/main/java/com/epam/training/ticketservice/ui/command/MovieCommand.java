@@ -46,6 +46,7 @@ public class MovieCommand {
     @ShellMethod(key = "list movies", value = "List movies")
     public String listMovies() {
         List<MovieDto> movieList = movieService.listMovies();
-        return movieList.isEmpty() ? "There are no movies at the moment" : movieList.stream().map(movie -> movie.toString()).collect(Collectors.joining("\n"));
+        return movieList.isEmpty() ? "There are no movies at the moment" : movieList.stream()
+                .map(movie -> movie.toString()).collect(Collectors.joining("\n"));
     }
 }

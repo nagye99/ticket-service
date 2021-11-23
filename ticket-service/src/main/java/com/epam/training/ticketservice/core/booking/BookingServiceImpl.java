@@ -22,7 +22,8 @@ public class BookingServiceImpl implements BookingService {
     private final ScreeningService screeningService;
     private final RoomService roomService;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, ScreeningService screeningService, RoomService roomService) {
+    public BookingServiceImpl
+            (BookingRepository bookingRepository, ScreeningService screeningService, RoomService roomService) {
         this.bookingRepository = bookingRepository;
         this.screeningService = screeningService;
         this.roomService = roomService;
@@ -30,7 +31,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public String bookSeats(UserDto user, ScreeningDto screeningDto, String seatsList) {
-        Integer screeningId = screeningService.getScreeningId(screeningDto.getMovie().getTitle(), screeningDto.getRoom().getName(), screeningDto.getDate());
+        Integer screeningId = screeningService
+                .getScreeningId(screeningDto.getMovie().getTitle(), screeningDto.getRoom().getName(), screeningDto.getDate());
         Optional<String[]> notRealSeat = isSeatInRoom(screeningId, seatsList);
         Optional<String> bookedSeat = isSeatEnable(screeningId, seatsList);
         if (notRealSeat.isPresent()) {
@@ -40,7 +42,8 @@ public class BookingServiceImpl implements BookingService {
         }
         Booking booking = new Booking(user.getUsername(), screeningId, seatsList);
         bookingRepository.save(booking);
-        return "Seats booked: ";
+        return "Seats booked: " + Stream.of(seatsList.split(" ")).map(seatPair -> "(" + seatPair + ")")
+                .collect(Collectors.joining(", ")) + "; the price for this booking is <a jegy ára> HUF";
     }
 
     private Optional<String[]> isSeatInRoom(Integer screeningId, String seatsList) {
@@ -50,8 +53,13 @@ public class BookingServiceImpl implements BookingService {
             Integer rows = room.get().getRows();
             Integer columns = room.get().getColumns();
 
-            List<String[]> seatPairs = Arrays.stream(seatsList.split(" ")).map(seatPair -> seatPair.split(",")).collect(Collectors.toList());
-            return seatPairs.stream().filter(seatPair -> Integer.valueOf(seatPair[0]) > rows || Integer.valueOf(seatPair[0]) < 1 || Integer.valueOf(seatPair[1]) > columns || Integer.valueOf(seatPair[1]) < 0).findFirst();
+            List<String[]> seatPairs = Arrays.stream(seatsList.split(" "))
+                    .map(seatPair -> seatPair.split(","))
+                    .collect(Collectors.toList());
+            return seatPairs
+                    .stream()
+                    .filter(seatPair -> Integer.valueOf(seatPair[0]) > rows || Integer.valueOf(seatPair[0]) < 1
+                            || Integer.valueOf(seatPair[1]) > columns || Integer.valueOf(seatPair[1]) < 0).findFirst();
         } else {
             throw new NullPointerException("Room doesn't exist.");
         }
@@ -59,10 +67,19 @@ public class BookingServiceImpl implements BookingService {
 
     private Optional<String> isSeatEnable(Integer screeningId, String seatsList) {
         List<Booking> bookings = bookingRepository.getByScreeningId(screeningId);
-        List<String> bookedSeatPairs = bookings.stream().flatMap(booking -> Stream.of(booking.getSeats().split(" "))).collect(Collectors.toList());
+        List<String> bookedSeatPairs = bookings
+                .stream()
+                .flatMap(booking -> Stream.of(booking.getSeats()
+                        .split(" ")))
+                .collect(Collectors.toList());
 
         String[] seatPairs = seatsList.split(" ");
-        return Arrays.stream(seatPairs).filter(seatPair -> bookedSeatPairs.stream().anyMatch(bookedSeatPair -> bookedSeatPair.equals(seatPair))).findFirst();
+        return Arrays
+                .stream(seatPairs)
+                .filter(seatPair -> bookedSeatPairs
+                        .stream()
+                        .anyMatch(bookedSeatPair -> bookedSeatPair.equals(seatPair)))
+                .findFirst();
     }
 
     private BookingDto convertBookingEntityToBookingDto(Booking booking) {

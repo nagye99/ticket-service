@@ -17,5 +17,6 @@ public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
 
     List<Screening> findByRoomName(String name);
 
-    Optional<Screening> getScreeningByMovieTitleAndRoomNameAndDate(String movieTitle, String roomName, LocalDateTime date);
+    Optional<Screening> getScreeningByMovieTitleAndRoomNameAndDate
+            (String movieTitle, String roomName, LocalDateTime date);
 }

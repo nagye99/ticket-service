@@ -52,7 +52,8 @@ public class ScreeningCommand {
     @ShellMethod(key = "delete screening", value = "Delete the given screening")
     public String deleteScreening(String title, String name, String date) {
         try {
-            Optional<ScreeningDto> screeningDto = screeningService.deleteScreening(title, name, LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            Optional<ScreeningDto> screeningDto = screeningService
+                    .deleteScreening(title, name, LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
             if (screeningDto.isPresent()) {
                 return screeningDto.get() + " deleted.";
             }
@@ -68,7 +69,12 @@ public class ScreeningCommand {
     public String listScreening() {
         try {
             List<ScreeningDto> screeningList = screeningService.listScreenings();
-            return screeningList.isEmpty() ? "There are no screenings" : screeningList.stream().map(room -> room.toString()).collect(Collectors.joining("\n"));
+            return screeningList.isEmpty() ?
+                    "There are no screenings" :
+                    screeningList
+                            .stream()
+                            .map(room -> room.toString())
+                            .collect(Collectors.joining("\n"));
         } catch (NullPointerException e) {
             return "One of the screening's movie or room doesn't exist.";
         }
