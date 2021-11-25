@@ -1,5 +1,6 @@
-package com.epam.training.ticketservice.core.movie;
+package com.epam.training.ticketservice.core.movie.impl;
 
+import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.entity.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.repository.MovieRepository;
@@ -29,8 +30,16 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Optional<MovieDto> updateMovie(String title, String genre, Integer length) {
-        return Optional.empty();
+    public void updateMovie(MovieDto movieDto) {
+        Optional<Movie> movieOpt = movieRepository.findByTitle(movieDto.getTitle());
+        if (movieOpt.isPresent()) {
+            Movie movie = movieOpt.get();
+            movie.setGenre(movieDto.getGenre());
+            movie.setLength(movieDto.getLength());
+            movieRepository.save(movie);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

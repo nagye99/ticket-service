@@ -10,5 +10,9 @@ public interface PriceComponentService {
 
     void updateBasePrice(Integer price);
 
+    Integer getBasePrice();
+
     Optional<PriceComponentDto> getComponentByName(String componentName);
+
+    Integer getPriceByComponentName(String componentName);
 }

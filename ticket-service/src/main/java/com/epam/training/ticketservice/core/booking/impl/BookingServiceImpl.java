@@ -1,8 +1,11 @@
-package com.epam.training.ticketservice.core.booking;
+package com.epam.training.ticketservice.core.booking.impl;
 
+import com.epam.training.ticketservice.core.booking.BookingService;
+import com.epam.training.ticketservice.core.price.AttachPriceService;
 import com.epam.training.ticketservice.core.booking.model.BookingDto;
 import com.epam.training.ticketservice.core.booking.persistence.entity.Booking;
 import com.epam.training.ticketservice.core.booking.persistence.repository.BookingRepository;
+import com.epam.training.ticketservice.core.price.PriceComponentService;
 import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.screening.ScreeningService;
@@ -21,29 +24,49 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final ScreeningService screeningService;
     private final RoomService roomService;
+    private final PriceComponentService priceComponentService;
+    private final AttachPriceService attachPriceService;
 
-    public BookingServiceImpl
-            (BookingRepository bookingRepository, ScreeningService screeningService, RoomService roomService) {
+    public BookingServiceImpl(BookingRepository bookingRepository,
+                              ScreeningService screeningService,
+                              RoomService roomService,
+                              PriceComponentService priceComponentService,
+                              AttachPriceService attachPriceService) {
         this.bookingRepository = bookingRepository;
         this.screeningService = screeningService;
         this.roomService = roomService;
+        this.priceComponentService = priceComponentService;
+        this.attachPriceService = attachPriceService;
     }
 
     @Override
     public String bookSeats(UserDto user, ScreeningDto screeningDto, String seatsList) {
-        Integer screeningId = screeningService
-                .getScreeningId(screeningDto.getMovie().getTitle(), screeningDto.getRoom().getName(), screeningDto.getDate());
+        Integer screeningId = screeningService.getScreeningId(screeningDto.getMovie().getTitle(),
+                screeningDto.getRoom().getName(),
+                screeningDto.getDate());
         Optional<String[]> notRealSeat = isSeatInRoom(screeningId, seatsList);
         Optional<String> bookedSeat = isSeatEnable(screeningId, seatsList);
         if (notRealSeat.isPresent()) {
             return "Seat " + notRealSeat.get()[0] + "," + notRealSeat.get()[1] + " does not exist in this room";
         } else if (bookedSeat.isPresent()) {
-            return "Seat " + bookedSeat.get() + " is already taken";
+            return "Seat (" + bookedSeat.get() + ") is already taken";
         }
-        Booking booking = new Booking(user.getUsername(), screeningId, seatsList);
+        Integer price = calculatePrice(screeningDto, seatsList);
+        Booking booking = new Booking(user.getUsername(), screeningId, seatsList, price);
         bookingRepository.save(booking);
         return "Seats booked: " + Stream.of(seatsList.split(" ")).map(seatPair -> "(" + seatPair + ")")
-                .collect(Collectors.joining(", ")) + "; the price for this booking is <a jegy ára> HUF";
+                .collect(Collectors.joining(", ")) + "; the price for this booking is " + price + " HUF";
+    }
+
+    @Override
+    public List<BookingDto> getBookingByUser(String username) {
+        List<Booking> bookings = bookingRepository.getBookingsByUsername(username);
+        return bookings.stream().map(this::convertBookingEntityToBookingDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer showPrice(ScreeningDto screeningDto, String seatsList) {
+        return  calculatePrice(screeningDto, seatsList);
     }
 
     private Optional<String[]> isSeatInRoom(Integer screeningId, String seatsList) {
@@ -82,10 +105,21 @@ public class BookingServiceImpl implements BookingService {
                 .findFirst();
     }
 
+    private Integer calculatePrice(ScreeningDto screeningDto, String seatsList) {
+        Integer personPrice = priceComponentService.getBasePrice() + attachPriceService.getPlusPrice(screeningDto);
+        Integer seatCount = Math.toIntExact(Arrays.stream(seatsList.split(" ")).count());
+        Integer price = personPrice * seatCount;
+        return price;
+    }
+
     private BookingDto convertBookingEntityToBookingDto(Booking booking) {
         ScreeningDto screeningDto = screeningService.getScreeningById(booking.getScreeningId());
-        List<String> seatPairs = List.of(booking.getSeats().split(" "));
-        BookingDto bookingDto = BookingDto.builder().screening(screeningDto).seats(seatPairs).build();
+        BookingDto bookingDto = BookingDto
+                .builder()
+                .screening(screeningDto)
+                .seats(booking.getSeats())
+                .price(booking.getPrice())
+                .build();
         return bookingDto;
     }
 }

@@ -1,9 +1,10 @@
-package com.epam.training.ticketservice.core.screening;
+package com.epam.training.ticketservice.core.screening.impl;
 
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
+import com.epam.training.ticketservice.core.screening.ScreeningService;
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.entity.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.repository.ScreeningRepository;
@@ -22,8 +23,9 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final MovieService movieService;
     private final RoomService roomService;
 
-    public ScreeningServiceImpl
-            (ScreeningRepository screeningRepository, MovieService movieService, RoomService roomService) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository,
+                                MovieService movieService,
+                                RoomService roomService) {
         this.screeningRepository = screeningRepository;
         this.movieService = movieService;
         this.roomService = roomService;
@@ -32,13 +34,14 @@ public class ScreeningServiceImpl implements ScreeningService {
     @Override
     public void addScreening(ScreeningDto screeningDto) {
         Objects.requireNonNull(screeningDto.getDate(), "Date of screening cannot be null during saving!");
-        Screening screening =
-                new Screening(screeningDto.getMovie().getTitle(), screeningDto.getRoom().getName(), screeningDto.getDate());
+        Screening screening = new Screening(screeningDto.getMovie().getTitle(),
+                screeningDto.getRoom().getName(),
+                screeningDto.getDate());
         if (checkScreeningIsInOtherScreening(screening)) {
             throw new IllegalArgumentException("There is an overlapping screening");
         } else if (checkScreeningIsInCleaning(screening)) {
-            throw
-                    new IllegalArgumentException("This would start in the break period after another screening in this room");
+            String message = "This would start in the break period after another screening in this room";
+            throw new IllegalArgumentException(message);
         } else {
             screeningRepository.save(screening);
         }
@@ -49,11 +52,12 @@ public class ScreeningServiceImpl implements ScreeningService {
         Objects.requireNonNull(movieTitle, "MovieTitle of screening cannot be null during delete!");
         Objects.requireNonNull(roomName, "RoomName of screening cannot be null during delete!");
         Objects.requireNonNull(date, "Date of screening cannot be null during delete!");
-        List<Screening> deletedScreenings =
-                screeningRepository.deleteByMovieTitleAndRoomNameAndDate(movieTitle, roomName, date);
-        Optional<Screening> screening = deletedScreenings.isEmpty() ?
-                Optional.empty() :
-                Optional.of(deletedScreenings.get(0));
+        List<Screening> deletedScreenings = screeningRepository.deleteByMovieTitleAndRoomNameAndDate(movieTitle,
+                roomName,
+                date);
+        Optional<Screening> screening = deletedScreenings.isEmpty()
+                ? Optional.empty()
+                : Optional.of(deletedScreenings.get(0));
         return convertScreeningEntityToScreeningDto(screening);
     }
 
@@ -82,13 +86,14 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     @Override
     public ScreeningDto getScreeningById(Integer id) {
-        Screening screening = screeningRepository.getById(id);
-        return convertScreeningEntityToScreeningDto(screening);
+        Optional<Screening> screening = screeningRepository.findById(id);
+        return convertScreeningEntityToScreeningDto(screening).get();
     }
 
     @Override
-    public Optional<ScreeningDto>
-    getScreeningByTitleRoomAndDate(String movieTitle, String roomName, LocalDateTime date) {
+    public Optional<ScreeningDto> getScreeningByTitleRoomAndDate(String movieTitle,
+                                                                 String roomName,
+                                                                 LocalDateTime date) {
         Optional<Screening> screening =
                 screeningRepository.getScreeningByMovieTitleAndRoomNameAndDate(movieTitle, roomName, date);
         return convertScreeningEntityToScreeningDto(screening);
@@ -100,7 +105,10 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .map(screen -> List.of(screen.getDate(), screen.getDate()
                         .plusMinutes(movieService.getMinutes(screen.getMovieTitle()))))
                 .collect(Collectors.toList());
-        LocalDateTime currentMovieEnd = screening.getDate().plusMinutes(movieService.getMinutes(screening.getMovieTitle()));
+        LocalDateTime currentMovieEnd = screening
+                .getDate()
+                .plusMinutes(movieService
+                        .getMinutes(screening.getMovieTitle()));
         return moviesStartAndEnd
                 .stream()
                 .anyMatch(startAndEnd -> (checkLocalDateBetween(screening.getDate(), startAndEnd.get(0),
@@ -117,12 +125,14 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .collect(Collectors.toList());
         return cleanStartAndEnd
                 .stream()
-                .anyMatch(startAndEnd -> checkLocalDateBetween(screening.getDate(), startAndEnd.get(0), startAndEnd.get(1)));
+                .anyMatch(startAndEnd -> checkLocalDateBetween(screening.getDate(),
+                        startAndEnd.get(0),
+                        startAndEnd.get(1)));
     }
 
     private boolean checkLocalDateBetween(LocalDateTime currentDate, LocalDateTime startDate, LocalDateTime endDate) {
         return (currentDate.isAfter(startDate) && currentDate.isBefore(endDate))
-                || currentDate.isEqual(startDate) || currentDate.isEqual(endDate);
+                || currentDate.isEqual(startDate);
     }
 
     private ScreeningDto convertScreeningEntityToScreeningDto(Screening screening) {
@@ -139,7 +149,8 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     private  Optional<ScreeningDto> convertScreeningEntityToScreeningDto(Optional<Screening> screening) {
-        return screening.isEmpty() ?
-                Optional.empty() : Optional.of(convertScreeningEntityToScreeningDto(screening.get()));
+        return screening.isEmpty()
+                ? Optional.empty()
+                : Optional.of(convertScreeningEntityToScreeningDto(screening.get()));
     }
 }

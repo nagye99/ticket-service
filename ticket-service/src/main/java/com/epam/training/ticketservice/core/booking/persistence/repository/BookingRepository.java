@@ -10,4 +10,6 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     List<Booking> getByScreeningId(Integer screeningId);
+
+    List<Booking> getBookingsByUsername(String username);
 }

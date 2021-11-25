@@ -362,3 +362,84 @@
 1637708619683:attach price component to room additionalFeeForPedersoli Pedersoli
 1637708639017:create price component additionalFeeForPulpFictionScreening 100
 1637708659050:attach price component to screening additionalFeeForPulpFictionScreening "Pulp Fiction" Girotti "2021-03-14 16:00"
+1637783519131:create movie Sátántangó drama 240
+1637783532966:create room Pedersoli 10 15
+1637783588653:create screening Sátántangó Pedersoli "2021-12-13 15:00"
+1637783599850:create screening Sátántangó Pedersoli "2021-12-13 15:30"
+1637785985004:exit
+1637789091934:create screening Sátántangó dra 450
+1637789112164:create movie Sátántangó dram 450
+1637789117140:list movies
+1637789131172:update movie Sátántangó drama 150
+1637789136104:list movies
+1637792336250:book Sátántangó room "2021-11-11 11:11" "5,5"
+1637792346370:stacktrace
+1637792376766:sign in admin admin
+1637792392288:sign in privileged admin admin
+1637792404395:book Sátántangó room "2021-11-11 11:11" "5,5"
+1637795721964:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637795730929:sign up eniko eniko
+1637795736841:sig in eniko eniko
+1637795744404:sign in eniko eniko
+1637795749893:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637795765072:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,10"
+1637795774787:book Sátántangó Pedersoli "2021-11-12 15:00" "5,6 10,10"
+1637795810744:create price component additional 1000
+1637795837257:attach pricecomponent Sátántangó additional
+1637795853572:attach price component Sátántangó additional
+1637795880951:attach price component to movie Sátántangó additional
+1637795906831:attach price component to movie additional Sátántangó
+1637795929428:book Sátántangó Pedersoli "2021-11-12 15:00" "5,7 10,15"
+1637795953766:attach price component to room additional Pedersoli
+1637795967716:book Sátántangó Pedersoli "2021-11-12 15:00" "1,1 2,2 3,3"
+1637796001527:update base price 2000
+1637796019622:book Sátántangó Pedersoli "2021-11-12 15:00" "2,3 4,5"
+1637796030863:exit
+1637796564821:show price for Sátántangó Pedersoli "2021-03-15 10:45" "10,5 11,5"
+1637796580175:stacktrace
+1637796693206:show price for Sátántangó Pedersoli "2021-03-15 10:45" "10,5 11,5"
+1637796717018:create screening Sátántangó Pedersoli "2021-03-15 10:45"
+1637796719293:show price for Sátántangó Pedersoli "2021-03-15 10:45" "10,5 11,5"
+1637796724201:exit
+1637842208759:sign up eniko eniko
+1637842215457:sign in eniko eniko
+1637842312904:book Sátántangó pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637842330305:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5 10,12"
+1637842343276:describe account
+1637842391166:stacktrace
+1637842740804:sign up eniko eniko
+1637842749934:sign in eniko eniko
+1637842756291:describe account
+1637842785790:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637842968201:sign up eniko eniko
+1637842973767:sign in eniko eniko
+1637843001153:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637843006360:describe account
+1637843013154:stacktrace
+1637843438201:sign up eniko eniko
+1637843443150:sign in eniko eniko
+1637843462216:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637843469427:describe account
+1637843573728:book Sátántangó Loumier "2021-11-15 20:00" "10,12 2,5"
+1637843580251:describe account
+1637843589518:update base price 2000
+1637843597989:describe account
+1637843965882:create movie asd ins 150
+1637843976297:sign in admin admin
+1637843998512:sign in privileged admin admin
+1637844009716:create movie asd ápk, 150
+1637844016924:sign out
+1637844025315:create movie iknl éojmél 1520
+1637844781924:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637844791192:sign in admin admin
+1637844796672:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637844801458:sign up a a
+1637844804864:sign in a a
+1637844807431:book Sátántangó Pedersoli "2021-11-12 15:00" "5,5"
+1637845132917:sign up eniko eniko
+1637845142186:sign in eniko eniko
+1637845161773:book Sátántangó Pedersoli "2021-11-12 15:00" "5,3"
+1637845170862:sign out
+1637845196326:show price Sátántangó Loumier "2021-11-15 20:00" "10,12 13,15 2,5"
+1637845213375:show price for Sátántangó Loumier "2021-11-15 20:00" "10,12 13,15 2,5"
+1637845225124:exit

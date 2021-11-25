@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.core.attachPrice;
+package com.epam.training.ticketservice.core.price;
 
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.price.model.PriceComponentDto;
@@ -11,4 +11,6 @@ public interface AttachPriceService {
     void savePriceToMovie(PriceComponentDto priceComponentDto, MovieDto movieDto);
 
     void savePriceToScreening(PriceComponentDto priceComponentDto, ScreeningDto screeningDto);
+
+    Integer getPlusPrice(ScreeningDto screeningDto);
 }

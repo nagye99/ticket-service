@@ -9,7 +9,7 @@ public interface RoomService {
 
     void addRoom(RoomDto roomDto);
 
-    Optional<RoomDto> updateRoom(String name, Integer cols, Integer rows);
+    void updateRoom(RoomDto roomDto);
 
     Optional<RoomDto> deleteRoom(String title);
 

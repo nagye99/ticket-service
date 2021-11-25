@@ -1,5 +1,6 @@
-package com.epam.training.ticketservice.core.price;
+package com.epam.training.ticketservice.core.price.impl;
 
+import com.epam.training.ticketservice.core.price.PriceComponentService;
 import com.epam.training.ticketservice.core.price.model.PriceComponentDto;
 import com.epam.training.ticketservice.core.price.persistence.entity.PriceComponent;
 import com.epam.training.ticketservice.core.price.persistence.repository.PriceComponentRepository;
@@ -9,7 +10,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class PriceComponentServiceImpl implements PriceComponentService{
+public class PriceComponentServiceImpl implements PriceComponentService {
     private final PriceComponentRepository priceComponentRepository;
 
     public PriceComponentServiceImpl(PriceComponentRepository priceComponentRepository) {
@@ -26,19 +27,33 @@ public class PriceComponentServiceImpl implements PriceComponentService{
 
     @Override
     public void updateBasePrice(Integer price) {
+        PriceComponent priceComponent = priceComponentRepository.findByName("base price").get();
+        priceComponent.setPrice(price);
+        priceComponentRepository.save(priceComponent);
+    }
 
+    @Override
+    public Integer getBasePrice() {
+        return priceComponentRepository.findByName("base price").get().getPrice();
     }
 
     @Override
     public Optional<PriceComponentDto> getComponentByName(String componentName) {
-        return convertPriceComponentEntityToPriceComponentDto(priceComponentRepository.findByName(componentName));
+        return convertPriceEntityToPriceDto(priceComponentRepository.findByName(componentName));
     }
 
-    private PriceComponentDto convertPriceComponentEntityToPriceComponentDto(PriceComponent priceComponent) {
+    @Override
+    public Integer getPriceByComponentName(String componentName) {
+        return priceComponentRepository.findByName(componentName).get().getPrice();
+    }
+
+    private PriceComponentDto convertPriceEntityToPriceDto(PriceComponent priceComponent) {
         return PriceComponentDto.builder().name(priceComponent.getName()).price(priceComponent.getPrice()).build();
     }
 
-    private  Optional<PriceComponentDto> convertPriceComponentEntityToPriceComponentDto(Optional<PriceComponent> priceComponent) {
-        return priceComponent.isEmpty() ? Optional.empty() : Optional.of(convertPriceComponentEntityToPriceComponentDto(priceComponent.get()));
+    private  Optional<PriceComponentDto> convertPriceEntityToPriceDto(Optional<PriceComponent> priceComponent) {
+        return priceComponent.isEmpty()
+                ? Optional.empty()
+                : Optional.of(convertPriceEntityToPriceDto(priceComponent.get()));
     }
 }

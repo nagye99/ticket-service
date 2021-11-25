@@ -21,10 +21,12 @@ public class Booking {
     private String username;
     private Integer screeningId;
     private String seats;
+    private Integer price;
 
-    public Booking(String username, Integer screeningId, String seats) {
+    public Booking(String username, Integer screeningId, String seats, Integer price) {
         this.username = username;
         this.screeningId = screeningId;
         this.seats = seats;
+        this.price = price;
     }
 }

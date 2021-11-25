@@ -1,5 +1,6 @@
-package com.epam.training.ticketservice.core.room;
+package com.epam.training.ticketservice.core.room.impl;
 
+import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.entity.Room;
 import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepository;
@@ -29,8 +30,16 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Optional<RoomDto> updateRoom(String name, Integer cols, Integer rows) {
-        return Optional.empty();
+    public void updateRoom(RoomDto roomDto) {
+        Optional<Room> roomOpt = roomRepository.findByName(roomDto.getName());
+        if (roomOpt.isPresent()) {
+            Room room = roomOpt.get();
+            room.setRows(roomDto.getRows());
+            room.setColumns(roomDto.getColumns());
+            roomRepository.save(room);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
