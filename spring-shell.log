@@ -443,3 +443,33 @@
 1637845196326:show price Sátántangó Loumier "2021-11-15 20:00" "10,12 13,15 2,5"
 1637845213375:show price for Sátántangó Loumier "2021-11-15 20:00" "10,12 13,15 2,5"
 1637845225124:exit
+1638479421211:create movie Sátántangó drama 450
+1638479438508:sign in privileged admin admin
+1638479450585:create movie Sátántangó drama 450
+1638479463133:create room Pedersoli 10 10
+1638479484279:create screening Sátántangó Pedersoli "2021-10-10 10:10"
+1638479495044:create screening Sátántangó Pedersoli "2021-10-10 10:1"
+1638479542896:book Sátántangó Pedersoli "2021-10-10 10:10" "5,5"
+1638479550645:sign out
+1638479556948:sign up e e
+1638479560858:sign in e e
+1638479571471:book Sátántangó Pedersoli "2021-10-10 10:10" "5,5"
+1638479589786:book fbn ojmcé "2021-10-10 10:10" 5,5
+1638480678927:create movie Sátátntangó drama 450
+1638480689007:sign in privileged admin admin
+1638480699906:create movie S d 450
+1638480738627:delete S
+1638480744391:delete movie S
+1638480767824:exit
+1638484211494:sign in privileged admin admin
+1638484233270:create movie Sátántangó drama 450
+1638484252818:create room Pedersoli 10 10
+1638484273112:create screening Sátántangó Pedersoli "2021-10-10 10:10"
+1638484281827:delete room Pedersoli
+1638484294566:delete screening Sátántangó Pedersoli "2021-10-10 10:10"
+1638484799277:exit
+1638485923766:sign in privileged admin admin
+1638485933106:create movie S a 10
+1638485940316:sign out
+1638485951677:create movie A b 20
+1638485962217:help

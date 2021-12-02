@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     @Transactional
-    List<Room> deleteByName(String name);
+    void deleteByName(String name);
 
     Optional<Room> findByName(String name);
 

@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     @Transactional
-    List<Movie> deleteByTitle(String title);
+    void deleteByTitle(String title);
 
     Optional<Movie> findByTitle(String title);
 }

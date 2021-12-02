@@ -21,33 +21,37 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void addMovie(MovieDto movieDto) {
-        Objects.requireNonNull(movieDto.getTitle(), "Title of movie cannot be null during saving!");
-        Objects.requireNonNull(movieDto.getGenre(), "Genre of movie cannot be null during saving!");
-        Objects.requireNonNull(movieDto.getLength(), "Duration of movie cannot be null during saving!");
-        Movie movie = new Movie(movieDto.getTitle(), movieDto.getGenre(), movieDto.getLength());
-        movieRepository.save(movie);
+    public String addMovie(MovieDto movieDto) {
+        try {
+            Objects.requireNonNull(movieDto.getTitle(), "Title of movie cannot be null during saving!");
+            Objects.requireNonNull(movieDto.getGenre(), "Genre of movie cannot be null during saving!");
+            Objects.requireNonNull(movieDto.getLength(), "Duration of movie cannot be null during saving!");
+            Movie movie = new Movie(movieDto.getTitle(), movieDto.getGenre(), movieDto.getLength());
+            movieRepository.save(movie);
+            return movieDto + " added to database.";
+        } catch (Exception e) {
+            return "Unsuccessful creating. The movie is already in the database.";
+        }
     }
 
     @Override
-    public void updateMovie(MovieDto movieDto) {
+    public String updateMovie(MovieDto movieDto) {
         Optional<Movie> movieOpt = movieRepository.findByTitle(movieDto.getTitle());
         if (movieOpt.isPresent()) {
             Movie movie = movieOpt.get();
             movie.setGenre(movieDto.getGenre());
             movie.setLength(movieDto.getLength());
             movieRepository.save(movie);
+            return movieDto + " is updated.";
         } else {
-            throw new IllegalArgumentException();
+            return "The movie doesn't exist.";
         }
     }
 
     @Override
-    public Optional<MovieDto> deleteMovie(String title) {
+    public void deleteMovie(String title) {
         Objects.requireNonNull(title, "Title of movie cannot be null during delete!");
-        List<Movie> deletedMovies = movieRepository.deleteByTitle(title);
-        Optional<Movie> movie = deletedMovies.isEmpty() ? Optional.empty() : Optional.of(deletedMovies.get(0));
-        return convertMovieEntityToMovieDto(movie);
+        movieRepository.deleteByTitle(title);
     }
 
     @Override
@@ -56,8 +60,13 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Optional<MovieDto> getMovieByTitle(String movieName) {
-        return convertMovieEntityToMovieDto(movieRepository.findByTitle(movieName));
+    public MovieDto getMovieByTitle(String movieName) {
+        Optional<MovieDto> movieDto = convertMovieEntityToMovieDto(movieRepository.findByTitle(movieName));
+        if (movieDto.isPresent()) {
+            return movieDto.get();
+        } else {
+            throw new IllegalArgumentException("The movie doesn't exist");
+        }
     }
 
     @Override
@@ -70,6 +79,7 @@ public class MovieServiceImpl implements MovieService {
         throw new NullPointerException("The movie doesn't exist.");
     }
 
+    @Override
     public long getMinutes(String title) {
         Optional<Movie> movieOptional = movieRepository.findByTitle(title);
         if (movieOptional.isPresent()) {

@@ -8,9 +8,9 @@ public interface UserService {
 
     Optional<UserDto> signIn(String username, String password);
 
-    Optional<UserDto> signOut();
+    void signOut();
 
     Optional<UserDto> getLoggedInUser();
 
-    void signUp(String username, String password);
+    String signUp(String username, String password);
 }

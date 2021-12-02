@@ -56,6 +56,7 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.save(booking);
         return "Seats booked: " + Stream.of(seatsList.split(" ")).map(seatPair -> "(" + seatPair + ")")
                 .collect(Collectors.joining(", ")) + "; the price for this booking is " + price + " HUF";
+
     }
 
     @Override
@@ -66,26 +67,22 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Integer showPrice(ScreeningDto screeningDto, String seatsList) {
-        return  calculatePrice(screeningDto, seatsList);
+        return calculatePrice(screeningDto, seatsList);
     }
 
     private Optional<String[]> isSeatInRoom(Integer screeningId, String seatsList) {
         String roomName = screeningService.getNameById(screeningId);
-        Optional<RoomDto> room = roomService.getRoomByName(roomName);//screeningService.getNameById(screeningId));
-        if (room.isPresent()) {
-            Integer rows = room.get().getRows();
-            Integer columns = room.get().getColumns();
+        RoomDto room = roomService.getRoomByName(roomName);//screeningService.getNameById(screeningId));
+        Integer rows = room.getRows();
+        Integer columns = room.getColumns();
 
-            List<String[]> seatPairs = Arrays.stream(seatsList.split(" "))
-                    .map(seatPair -> seatPair.split(","))
-                    .collect(Collectors.toList());
-            return seatPairs
-                    .stream()
-                    .filter(seatPair -> Integer.valueOf(seatPair[0]) > rows || Integer.valueOf(seatPair[0]) < 1
-                            || Integer.valueOf(seatPair[1]) > columns || Integer.valueOf(seatPair[1]) < 0).findFirst();
-        } else {
-            throw new NullPointerException("Room doesn't exist.");
-        }
+        List<String[]> seatPairs = Arrays.stream(seatsList.split(" "))
+                .map(seatPair -> seatPair.split(","))
+                .collect(Collectors.toList());
+        return seatPairs
+                .stream()
+                .filter(seatPair -> Integer.valueOf(seatPair[0]) > rows || Integer.valueOf(seatPair[0]) < 1
+                        || Integer.valueOf(seatPair[1]) > columns || Integer.valueOf(seatPair[1]) < 0).findFirst();
     }
 
     private Optional<String> isSeatEnable(Integer screeningId, String seatsList) {

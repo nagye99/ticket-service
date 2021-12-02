@@ -38,8 +38,14 @@ public class PriceComponentServiceImpl implements PriceComponentService {
     }
 
     @Override
-    public Optional<PriceComponentDto> getComponentByName(String componentName) {
-        return convertPriceEntityToPriceDto(priceComponentRepository.findByName(componentName));
+    public PriceComponentDto getComponentByName(String componentName) {
+        Optional<PriceComponentDto> priceComponentDto;
+        priceComponentDto = convertPriceEntityToPriceDto(priceComponentRepository.findByName(componentName));
+        if(priceComponentDto.isPresent()) {
+            return priceComponentDto.get();
+        } else {
+            throw new IllegalArgumentException("The priceComponent doesn't exist");
+        }
     }
 
     @Override

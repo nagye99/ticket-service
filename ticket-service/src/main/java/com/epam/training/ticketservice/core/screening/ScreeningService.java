@@ -5,13 +5,12 @@ import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface ScreeningService {
 
     void addScreening(ScreeningDto screeningDto);
 
-    Optional<ScreeningDto> deleteScreening(String movieTitle, String roomName, LocalDateTime date);
+    void deleteScreening(String movieTitle, String roomName, LocalDateTime date);
 
     List<ScreeningDto> listScreenings();
 
@@ -21,5 +20,5 @@ public interface ScreeningService {
 
     ScreeningDto getScreeningById(Integer id);
 
-    Optional<ScreeningDto> getScreeningByTitleRoomAndDate(String movieTitle, String roomName, LocalDateTime date);
+    ScreeningDto getScreeningByTitleRoomAndDate(String movieTitle, String roomName, LocalDateTime date);
 }

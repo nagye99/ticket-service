@@ -48,17 +48,13 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
-    public Optional<ScreeningDto> deleteScreening(String movieTitle, String roomName, LocalDateTime date) {
+    public void deleteScreening(String movieTitle, String roomName, LocalDateTime date) {
         Objects.requireNonNull(movieTitle, "MovieTitle of screening cannot be null during delete!");
         Objects.requireNonNull(roomName, "RoomName of screening cannot be null during delete!");
         Objects.requireNonNull(date, "Date of screening cannot be null during delete!");
-        List<Screening> deletedScreenings = screeningRepository.deleteByMovieTitleAndRoomNameAndDate(movieTitle,
+        screeningRepository.deleteByMovieTitleAndRoomNameAndDate(movieTitle,
                 roomName,
                 date);
-        Optional<Screening> screening = deletedScreenings.isEmpty()
-                ? Optional.empty()
-                : Optional.of(deletedScreenings.get(0));
-        return convertScreeningEntityToScreeningDto(screening);
     }
 
     @Override
@@ -91,12 +87,17 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
-    public Optional<ScreeningDto> getScreeningByTitleRoomAndDate(String movieTitle,
-                                                                 String roomName,
-                                                                 LocalDateTime date) {
+    public ScreeningDto getScreeningByTitleRoomAndDate(String movieTitle,
+                                                       String roomName,
+                                                       LocalDateTime date) {
         Optional<Screening> screening =
                 screeningRepository.getScreeningByMovieTitleAndRoomNameAndDate(movieTitle, roomName, date);
-        return convertScreeningEntityToScreeningDto(screening);
+        Optional<ScreeningDto> screeningDto = convertScreeningEntityToScreeningDto(screening);
+        if (screeningDto.isPresent()) {
+            return screeningDto.get();
+        } else {
+            throw new IllegalArgumentException("The screening doesn't exist");
+        }
     }
 
     private boolean checkScreeningIsInOtherScreening(Screening screening) {
@@ -136,19 +137,15 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     private ScreeningDto convertScreeningEntityToScreeningDto(Screening screening) {
-        Optional<MovieDto> movie = movieService.getMovieByTitle(screening.getMovieTitle());
-        Optional<RoomDto> room = roomService.getRoomByName(screening.getRoomName());
-        if (movie.isPresent() && room.isPresent()) {
-            return ScreeningDto.builder().movie(movie.get())
-                        .room(room.get())
-                        .date(screening.getDate())
-                        .build();
-        } else {
-            throw new NullPointerException();
-        }
+        MovieDto movie = movieService.getMovieByTitle(screening.getMovieTitle());
+        RoomDto room = roomService.getRoomByName(screening.getRoomName());
+        return ScreeningDto.builder().movie(movie)
+                .room(room)
+                .date(screening.getDate())
+                .build();
     }
 
-    private  Optional<ScreeningDto> convertScreeningEntityToScreeningDto(Optional<Screening> screening) {
+    private Optional<ScreeningDto> convertScreeningEntityToScreeningDto(Optional<Screening> screening) {
         return screening.isEmpty()
                 ? Optional.empty()
                 : Optional.of(convertScreeningEntityToScreeningDto(screening.get()));

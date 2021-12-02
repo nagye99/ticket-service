@@ -44,12 +44,7 @@ public class UserCommand {
 
     @ShellMethod(key = "sign up", value = "Sign up new account")
     public String signUp(String userName, String password) {
-        try {
-            userService.signUp(userName, password);
-            return "Registration was successful!";
-        } catch (Exception e) {
-            return "Registration failed!";
-        }
+            return userService.signUp(userName, password);
     }
 
     @ShellMethod(key = "sign in", value = "Sign in")
@@ -73,10 +68,7 @@ public class UserCommand {
 
     @ShellMethod(key = "sign out", value = "Sign out")
     public String signOut() {
-        Optional<UserDto> user = userService.signOut();
-        if (user.isEmpty()) {
-            return "You need to login first!";
-        }
-        return user.get() + " is logged out!";
+        userService.signOut();
+        return " Logged out!";
     }
 }

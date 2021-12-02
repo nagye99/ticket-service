@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
 
     @Transactional
-    List<Screening> deleteByMovieTitleAndRoomNameAndDate(String movieTitle, String roomName, LocalDateTime date);
+    void deleteByMovieTitleAndRoomNameAndDate(String movieTitle, String roomName, LocalDateTime date);
 
     List<Screening> findByRoomName(String name);
 

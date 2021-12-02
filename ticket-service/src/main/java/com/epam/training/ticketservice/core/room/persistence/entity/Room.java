@@ -10,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
