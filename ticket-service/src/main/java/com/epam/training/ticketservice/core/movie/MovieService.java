@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MovieService {
 
-    String addMovie(MovieDto movieDto);
+    void addMovie(MovieDto movieDto);
 
     String updateMovie(MovieDto movieDto);
 

@@ -35,8 +35,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void signOut() {
+    public Optional<UserDto> signOut() {
+        Optional<UserDto> previouslyLoggedInUser = getLoggedInUser();
         loggedInUser = null;
+        return previouslyLoggedInUser;
     }
 
     @Override
@@ -46,15 +48,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String signUp(String username, String password) {
-        try {
-            Objects.requireNonNull(username, "Username cannot be null during registration!");
-            Objects.requireNonNull(password, "Password cannot be null during registration!");
-            User user = new User(username, password, User.Role.USER);
-            userRepository.save(user);
-            return "Registration was successful!";
-        } catch (Exception e) {
-            return "Registration failed!";
-        }
+        Objects.requireNonNull(username, "Username cannot be null during registration!");
+        Objects.requireNonNull(password, "Password cannot be null during registration!");
+        User user = new User(username, password, User.Role.USER);
+        userRepository.save(user);
+        return "Registration was successful!";
+
     }
 
     private UserDto retrieveUserInfoByNameAndPassword(String username, String password) {

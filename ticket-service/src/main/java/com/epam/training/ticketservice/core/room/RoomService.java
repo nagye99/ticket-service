@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RoomService {
 
-    String addRoom(RoomDto roomDto);
+    void addRoom(RoomDto roomDto);
 
     String updateRoom(RoomDto roomDto);
 

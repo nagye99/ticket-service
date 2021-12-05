@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -24,8 +25,13 @@ public class MovieCommand {
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "create movie", value = "Add movie to database")
     public String createMovie(String title, String genre, int length) {
-        MovieDto movie = MovieDto.builder().title(title).genre(genre).length(length).build();
-        return movieService.addMovie(movie);
+        try {
+            MovieDto movie = MovieDto.builder().title(title).genre(genre).length(length).build();
+            movieService.addMovie(movie);
+            return movie + " added to database.";
+        }  catch (DataIntegrityViolationException e) {
+            return "Unsuccessful creating. The movie is already in the database.";
+        }
     }
 
     @ShellMethodAvailability("isAdmin")

@@ -21,21 +21,21 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public String addRoom(RoomDto roomDto) {
-        try {
-            Objects.requireNonNull(roomDto.getName(), "Name of the room cannot be null during saving!");
-            Objects.requireNonNull(roomDto.getColumns(), "Columns of chairs cannot be null during saving!");
-            Objects.requireNonNull(roomDto.getRows(), "Rows of chairs cannot be null during saving!");
-            Room room = new Room(roomDto.getName(), roomDto.getRows(), roomDto.getColumns());
-            roomRepository.save(room);
-            return roomDto + " added to database.";
-        } catch (Exception e) {
-            return "Unsuccessful creating. The room is already in the database.";
-        }
+    public void addRoom(RoomDto roomDto) {
+        Objects.requireNonNull(roomDto, "Room cannot be null");
+        Objects.requireNonNull(roomDto.getName(), "Name of the room cannot be null during saving!");
+        Objects.requireNonNull(roomDto.getColumns(), "Columns of chairs cannot be null during saving!");
+        Objects.requireNonNull(roomDto.getRows(), "Rows of chairs cannot be null during saving!");
+        Room room = new Room(roomDto.getName(), roomDto.getRows(), roomDto.getColumns());
+        roomRepository.save(room);
     }
 
     @Override
     public String updateRoom(RoomDto roomDto) {
+        Objects.requireNonNull(roomDto, "Room cannot be null");
+        Objects.requireNonNull(roomDto.getName(), "Name of the room cannot be null during update!");
+        Objects.requireNonNull(roomDto.getColumns(), "Columns of chairs cannot be null during update!");
+        Objects.requireNonNull(roomDto.getRows(), "Rows of chairs cannot be null during update!");
         Optional<Room> roomOpt = roomRepository.findByName(roomDto.getName());
         if (roomOpt.isPresent()) {
             Room room = roomOpt.get();
@@ -62,7 +62,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDto getRoomByName(String name) {
         Optional<RoomDto> roomDto = convertRoomEntityToRoomDto(roomRepository.findByName(name));
-        if(roomDto.isPresent()) {
+        if (roomDto.isPresent()) {
             return roomDto.get();
         } else {
             throw new IllegalArgumentException("The room doesn't exist");
@@ -83,7 +83,7 @@ public class RoomServiceImpl implements RoomService {
         return RoomDto.builder().name(room.getName()).rows(room.getRows()).columns(room.getColumns()).build();
     }
 
-    private  Optional<RoomDto> convertRoomEntityToRoomDto(Optional<Room> room) {
+    private Optional<RoomDto> convertRoomEntityToRoomDto(Optional<Room> room) {
         return room.isEmpty() ? Optional.empty() : Optional.of(convertRoomEntityToRoomDto(room.get()));
     }
 }

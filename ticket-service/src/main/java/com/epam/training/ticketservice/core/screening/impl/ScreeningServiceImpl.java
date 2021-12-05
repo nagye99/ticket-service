@@ -114,7 +114,7 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .stream()
                 .anyMatch(startAndEnd -> (checkLocalDateBetween(screening.getDate(), startAndEnd.get(0),
                         startAndEnd.get(1)) || checkLocalDateBetween(currentMovieEnd.plusMinutes(10),
-                        startAndEnd.get(0), startAndEnd.get(1))));
+                        startAndEnd.get(0), LocalDateTime.MAX)));
     }
 
     private boolean checkScreeningIsInCleaning(Screening screening) {

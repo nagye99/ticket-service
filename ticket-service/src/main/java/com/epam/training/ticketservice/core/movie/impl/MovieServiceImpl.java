@@ -21,21 +21,21 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public String addMovie(MovieDto movieDto) {
-        try {
+    public void addMovie(MovieDto movieDto) {
+            Objects.requireNonNull(movieDto, "Movie cannot be null");
             Objects.requireNonNull(movieDto.getTitle(), "Title of movie cannot be null during saving!");
             Objects.requireNonNull(movieDto.getGenre(), "Genre of movie cannot be null during saving!");
             Objects.requireNonNull(movieDto.getLength(), "Duration of movie cannot be null during saving!");
             Movie movie = new Movie(movieDto.getTitle(), movieDto.getGenre(), movieDto.getLength());
             movieRepository.save(movie);
-            return movieDto + " added to database.";
-        } catch (Exception e) {
-            return "Unsuccessful creating. The movie is already in the database.";
-        }
     }
 
     @Override
     public String updateMovie(MovieDto movieDto) {
+        Objects.requireNonNull(movieDto, "Movie cannot be null");
+        Objects.requireNonNull(movieDto.getTitle(), "Title of movie cannot be null during update!");
+        Objects.requireNonNull(movieDto.getGenre(), "Genre of movie cannot be null during update!");
+        Objects.requireNonNull(movieDto.getLength(), "Duration of movie cannot be null during update!");
         Optional<Movie> movieOpt = movieRepository.findByTitle(movieDto.getTitle());
         if (movieOpt.isPresent()) {
             Movie movie = movieOpt.get();

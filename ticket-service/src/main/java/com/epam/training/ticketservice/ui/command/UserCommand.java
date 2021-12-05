@@ -5,6 +5,7 @@ import com.epam.training.ticketservice.core.booking.model.BookingDto;
 import com.epam.training.ticketservice.core.user.UserService;
 import com.epam.training.ticketservice.core.user.model.UserDto;
 import com.epam.training.ticketservice.core.user.persistence.entity.User;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -44,7 +45,11 @@ public class UserCommand {
 
     @ShellMethod(key = "sign up", value = "Sign up new account")
     public String signUp(String userName, String password) {
+        try {
             return userService.signUp(userName, password);
+        }  catch (DataIntegrityViolationException e) {
+            return "Registration failed!";
+        }
     }
 
     @ShellMethod(key = "sign in", value = "Sign in")

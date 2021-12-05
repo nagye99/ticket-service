@@ -2,6 +2,7 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -24,8 +25,13 @@ public class RoomCommand {
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "create room", value = "Add room to database")
     public String createRoom(String name, int rows, int cols) {
-        RoomDto room = RoomDto.builder().name(name).rows(rows).columns(cols).build();
-        return roomService.addRoom(room);
+        try {
+            RoomDto room = RoomDto.builder().name(name).rows(rows).columns(cols).build();
+            roomService.addRoom(room);
+            return room + " added to database.";
+        } catch (DataIntegrityViolationException e) {
+        return "Unsuccessful creating. The room is already in the database.";
+    }
     }
 
     @ShellMethodAvailability("isAdmin")

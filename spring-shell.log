@@ -473,3 +473,47 @@
 1638485940316:sign out
 1638485951677:create movie A b 20
 1638485962217:help
+1638645469425:sign in privileged admin admin
+1638645478347:create movie A d 4
+1638645485668:create movie A d 5
+1638645618553:create movie A q 1
+1638645631619:sign in privileged admin admin
+1638645657801:create movie A c 1
+1638645663934:create movie w 2
+1638645693661:create movie A w 2
+1638645744121:stacktrace
+1638646043504:sign in privileged
+1638646052175:sign in privileged admin admin
+1638646073863:create movie A b 1
+1638646084914:create movie A s 0
+1638646278635:sig
+1638646286375:sign in privileged admin admin
+1638646302873:create movie l j 1
+1638646313951:create movie l k 2
+1638646385776:sign in privileged admin admin
+1638646394678:create movie s a 1
+1638646407518:create movie s k 4
+1638646482372:sign in privileged admin admin
+1638646491618:create ovie
+1638646499568:create movie a k 1
+1638646507690:create  movie a o 1
+1638646766337:sign in privileged admin admin
+1638646786880:create movie d a 1
+1638646813814:stacktrace
+1638647585609:sign in privileged admin admin
+1638647595896:create movie a b 1
+1638647603424:create movie a d 0
+1638647654041:sign in privileged admin admin
+1638647663274:create movie a a 1
+1638647669958:create movie a b 1
+1638666778515:sign in privileged admin admin
+1638666812388:create movie It horror 135
+1638666831467:create room Pedersoli 10 10
+1638666853418:create screening It Pedersoli "2021-12-10 14:00"
+1638666874975:create screening It Pedersoli "2021-12-10 13:50"
+1638667050311:sign in privileged admin admin
+1638667061691:create movie It h 135
+1638667073878:create room Pedersoli 1 1
+1638667090888:create creening It Pedersoli "2021-12-10 14:05"
+1638667103891:create screening It Pedersoli "2021-12-10 14:05"
+1638667112611:create screening It Pedersoli "2021-12-10 14:00"
