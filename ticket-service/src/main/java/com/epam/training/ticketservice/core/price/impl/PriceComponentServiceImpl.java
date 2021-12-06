@@ -54,17 +54,17 @@ public class PriceComponentServiceImpl implements PriceComponentService {
         if (priceComponentDto.isPresent()) {
             return priceComponentDto.get();
         } else {
-            throw new IllegalArgumentException("The priceComponent doesn't exist");
+            throw new NullPointerException("The priceComponent doesn't exist");
         }
     }
 
     @Override
     public Integer getPriceByComponentName(String componentName) {
         Optional<PriceComponent> priceComponent = priceComponentRepository.findByName(componentName);
-        if(priceComponent.isPresent()){
+        if (priceComponent.isPresent()) {
             return priceComponent.get().getPrice();
         } else {
-            throw new NullPointerException("Base price doesn't set");
+            throw new NullPointerException("The priceComponent doesn't exist");
         }
     }
 

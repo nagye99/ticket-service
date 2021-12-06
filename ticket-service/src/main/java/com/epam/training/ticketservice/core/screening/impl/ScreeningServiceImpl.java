@@ -141,7 +141,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     private boolean checkDateBetween(LocalDateTime currentDate, LocalDateTime startDate, LocalDateTime endDate) {
-        return (currentDate.isAfter(startDate) && currentDate.isBefore(endDate)) || currentDate.isEqual(startDate);
+        return currentDate.isEqual(startDate) || (currentDate.isAfter(startDate) && currentDate.isBefore(endDate));
     }
 
     private ScreeningDto convertScreeningEntityToScreeningDto(Screening screening) {

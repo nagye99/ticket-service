@@ -66,14 +66,16 @@ class PriceComponentServiceImplTest {
     @Test
     void testUpdateBasePriceShouldCallPriceComponentRepository(){
         //Given
-        when(priceComponentRepository.findByName("base price")).thenReturn(java.util.Optional.of(BASE_PRICE_ENTITY));
-        when(priceComponentRepository.save(new PriceComponent("base price", 1000))).thenReturn(new PriceComponent("base price", 1000));
+        when(priceComponentRepository.findByName("base price")).thenReturn(java.util.Optional.of(new PriceComponent("base price", 1500)));
+
+        PriceComponent updatedPriceComponent = new PriceComponent("base price", 1000);
+        when(priceComponentRepository.save(updatedPriceComponent)).thenReturn(updatedPriceComponent);
 
         //When
         underTest.updateBasePrice(1000);
 
         //Then
-        verify(priceComponentRepository).save(new PriceComponent("base price", 1000));
+        verify(priceComponentRepository).save(updatedPriceComponent);
     }
 
     @Test
@@ -105,6 +107,51 @@ class PriceComponentServiceImplTest {
         when(priceComponentRepository.findByName("base price")).thenReturn(Optional.empty());
 
         //When - Then
-        assertThrows(NullPointerException.class, () -> underTest.updateBasePrice(1000));
+        assertThrows(NullPointerException.class, () -> underTest.getBasePrice());
+    }
+
+
+    @Test
+    void testGetComponentByNameShouldReturnPriceComponent(){
+        //Given
+        when(priceComponentRepository.findByName("a")).thenReturn(Optional.of(PRICE_COMPONENT_ENTITY));
+        PriceComponentDto expected = PRICE_COMPONENT_DTO;
+
+        //When
+        PriceComponentDto actual = underTest.getComponentByName("a");
+
+        //Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetComponentByNameShouldThrowNullPointerExceptionWhenComponentNotExisist(){
+        //Given
+        when(priceComponentRepository.findByName("b")).thenReturn(Optional.empty());
+
+        //When - Then
+        assertThrows(NullPointerException.class, () -> underTest.getComponentByName("b"));
+    }
+
+    @Test
+    void testGetPriceByComponentNameShouldReturnPrice(){
+        //Given
+        when(priceComponentRepository.findByName("a")).thenReturn(Optional.of(PRICE_COMPONENT_ENTITY));
+        Integer expected = 1000;
+
+        //When
+        Integer actual = underTest.getPriceByComponentName("a");
+
+        //Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetPriceByComponentNameShouldThrowNullPointerExceptionWhenComponentNotExisist(){
+        //Given
+        when(priceComponentRepository.findByName("b")).thenReturn(Optional.empty());
+
+        //When - Then
+        assertThrows(NullPointerException.class, () -> underTest.getPriceByComponentName("b"));
     }
 }

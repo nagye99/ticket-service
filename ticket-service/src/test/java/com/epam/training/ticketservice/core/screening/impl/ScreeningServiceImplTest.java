@@ -145,6 +145,16 @@ class ScreeningServiceImplTest {
     }
 
     @Test
+    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningAreSame() {
+        // Given
+        when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of(SCREENING_ENTITY));
+        when(movieService.getMinutes("It")).thenReturn(Long.valueOf(135));
+
+        // When - Then
+        assertThrows(IllegalArgumentException.class, () -> underTest.addScreening(SCREENING_DTO));
+    }
+
+    @Test
     void testAddScreeningShouldCallScreeningRepositoryWhenTheInputDataIsCorrect() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of());
