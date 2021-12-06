@@ -18,13 +18,13 @@ class RoomServiceImplTest {
     private static final Room LOUMIER_ENTITY = new Room("Loumier", 20, 23);
     private static final RoomDto PEDERSOLI_DTO = RoomDto.builder()
             .name("Pedersoli")
-            .rows(10)
-            .columns(10)
+            .roomRows(10)
+            .roomColumns(10)
             .build();
     private static final RoomDto LOUMIER_DTO = RoomDto.builder()
             .name("Loumier")
-            .rows(20)
-            .columns(23)
+            .roomRows(20)
+            .roomColumns(23)
             .build();
 
     private final RoomRepository roomRepository = mock(RoomRepository.class);
@@ -35,8 +35,8 @@ class RoomServiceImplTest {
         // Given
         RoomDto roomDto = RoomDto.builder()
                 .name(null)
-                .rows(10)
-                .columns(10)
+                .roomRows(10)
+                .roomColumns(10)
                 .build();
 
         // When - Then
@@ -48,8 +48,8 @@ class RoomServiceImplTest {
         // Given
         RoomDto roomDto = RoomDto.builder()
                 .name("Pedersoli")
-                .rows(null)
-                .columns(10)
+                .roomRows(null)
+                .roomColumns(10)
                 .build();
 
         // When - Then
@@ -61,8 +61,8 @@ class RoomServiceImplTest {
         // Given
         RoomDto roomDto = RoomDto.builder()
                 .name("Pedersoli")
-                .rows(10)
-                .columns(null)
+                .roomRows(10)
+                .roomColumns(null)
                 .build();
 
         // When - Then
@@ -92,8 +92,8 @@ class RoomServiceImplTest {
         // Given
         RoomDto roomDto = RoomDto.builder()
                 .name(null)
-                .columns(10)
-                .rows(15)
+                .roomColumns(10)
+                .roomRows(15)
                 .build();
 
         // When - Then
@@ -105,8 +105,8 @@ class RoomServiceImplTest {
         // Given
         RoomDto roomDto = RoomDto.builder()
                 .name("Pedersoli")
-                .columns(null)
-                .rows(15)
+                .roomColumns(null)
+                .roomRows(15)
                 .build();
 
         // When - Then
@@ -118,8 +118,8 @@ class RoomServiceImplTest {
         // Given
         RoomDto roomDto = RoomDto.builder()
                 .name("Pedersoli")
-                .columns(10)
-                .rows(null)
+                .roomColumns(10)
+                .roomRows(null)
                 .build();
 
         // When - Then
@@ -141,8 +141,8 @@ class RoomServiceImplTest {
         RoomDto UPDATED_PEDERSOLI_DTO = RoomDto
                 .builder()
                 .name("Pedersoli")
-                .rows(12)
-                .columns(15)
+                .roomRows(12)
+                .roomColumns(15)
                 .build();
 
         String expected = UPDATED_PEDERSOLI_DTO + " is updated.";
@@ -165,8 +165,8 @@ class RoomServiceImplTest {
         RoomDto UPDATED_JACK_DTO = RoomDto
                 .builder()
                 .name("JACK")
-                .columns(21)
-                .rows(22)
+                .roomColumns(21)
+                .roomRows(22)
                 .build();
 
         String expected = "The room doesn't exist.";

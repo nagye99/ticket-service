@@ -517,3 +517,44 @@
 1638667090888:create creening It Pedersoli "2021-12-10 14:05"
 1638667103891:create screening It Pedersoli "2021-12-10 14:05"
 1638667112611:create screening It Pedersoli "2021-12-10 14:00"
+1638738950837:sign in privileged admin admin
+1638738968083:create movie Sátántangó drama 100
+1638739040676:list movies
+1638740263492:exit
+1638740761461:sign in privileged admin admin
+1638740797059:create movie Sátántangó drama 450
+1638740818609:create room Pedersoli 10 10
+1638741221690:list movies
+1638741232628:sign in privileged admin admin
+1638741241983:create room Pedersoli 10 10
+1638741251884:exit
+1638798745087:list movies
+1638817489761:sign in privileged admina admin
+1638817509593:create movie It horror 135
+1638817520615:sign in privileged admin admin
+1638817529249:create movie It horror 135
+1638817559202:create room Pedersoli 10 10
+1638817591137:create screenng It Pedersoli 11:40
+1638817612423:create screening It Pedersoli "2021-12-10 11:40"
+1638817639841:create screening It Pedersoli "2021-12-10 14:00"
+1638817666055:create screening It Pedersoli "2021-12-10 14:10"
+1638817704752:create screening It Pedersoli "2021-12-10 14:15"
+1638817710522:create screening It Pedersoli "2021-12-10 14:20"
+1638817732198:create screening It Pedersoli "2021-12-10 15:10"
+1638817740539:create screening It Pedersoli "2021-12-12 14:10"
+1638818002905:sign in privileged admin admin
+1638818010360:1638817520615:sign in privileged admin admin
+1638818023214:1638817529249:create movie It horror 135
+1638818035590:create movie It horror 135
+1638818043548:create room Pedersoli 10 10
+1638818051561:create screenng It Pedersoli 11:40
+1638818068323:create screening It Pedersoli "2021-12-10 11:40"
+1638818077803:create screening It Pedersoli "2021-12-10 14:00"
+1638818409499:sign in privileged admin admin
+1638818417336:create movie It horror 135
+1638818430675:create room Pedersoli 10 10
+1638818439719:create screening It Pedersoli "2021-12-10 11:40"
+1638818446343:create screening It Pedersoli "2021-12-10 14:00"
+1638818458829:create screening It Pedersoli "2021-12-10 13:50"
+1638818475627:create screening It Pedersoli "2021-12-10 11:35"
+1638818485363:create screening It Pedersoli "2021-12-10 10:00"

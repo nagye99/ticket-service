@@ -22,12 +22,12 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void addMovie(MovieDto movieDto) {
-            Objects.requireNonNull(movieDto, "Movie cannot be null");
-            Objects.requireNonNull(movieDto.getTitle(), "Title of movie cannot be null during saving!");
-            Objects.requireNonNull(movieDto.getGenre(), "Genre of movie cannot be null during saving!");
-            Objects.requireNonNull(movieDto.getLength(), "Duration of movie cannot be null during saving!");
-            Movie movie = new Movie(movieDto.getTitle(), movieDto.getGenre(), movieDto.getLength());
-            movieRepository.save(movie);
+        Objects.requireNonNull(movieDto, "Movie cannot be null");
+        Objects.requireNonNull(movieDto.getTitle(), "Title of movie cannot be null during saving!");
+        Objects.requireNonNull(movieDto.getGenre(), "Genre of movie cannot be null during saving!");
+        Objects.requireNonNull(movieDto.getLength(), "Duration of movie cannot be null during saving!");
+        Movie movie = new Movie(movieDto.getTitle(), movieDto.getGenre(), movieDto.getLength());
+        movieRepository.save(movie);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class MovieServiceImpl implements MovieService {
         return MovieDto.builder().title(movie.getTitle()).genre(movie.getGenre()).length(movie.getLength()).build();
     }
 
-    private  Optional<MovieDto> convertMovieEntityToMovieDto(Optional<Movie> movie) {
+    private Optional<MovieDto> convertMovieEntityToMovieDto(Optional<Movie> movie) {
         return movie.isEmpty() ? Optional.empty() : Optional.of(convertMovieEntityToMovieDto(movie.get()));
     }
 }

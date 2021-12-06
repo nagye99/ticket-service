@@ -27,21 +27,31 @@ public class PriceComponentServiceImpl implements PriceComponentService {
 
     @Override
     public void updateBasePrice(Integer price) {
-        PriceComponent priceComponent = priceComponentRepository.findByName("base price").get();
-        priceComponent.setPrice(price);
-        priceComponentRepository.save(priceComponent);
+        Optional<PriceComponent> priceComponentOpt = priceComponentRepository.findByName("base price");
+        if (priceComponentOpt.isPresent()) {
+            PriceComponent priceComponent = priceComponentOpt.get();
+            priceComponent.setPrice(price);
+            priceComponentRepository.save(priceComponent);
+        } else {
+            throw new NullPointerException("Base price doesn't set");
+        }
     }
 
     @Override
     public Integer getBasePrice() {
-        return priceComponentRepository.findByName("base price").get().getPrice();
+        Optional<PriceComponent> priceComponentOptional = priceComponentRepository.findByName("base price");
+        if (priceComponentOptional.isPresent()) {
+            return priceComponentOptional.get().getPrice();
+        } else {
+            throw new NullPointerException("Base price doesn't set");
+        }
     }
 
     @Override
     public PriceComponentDto getComponentByName(String componentName) {
         Optional<PriceComponentDto> priceComponentDto;
         priceComponentDto = convertPriceEntityToPriceDto(priceComponentRepository.findByName(componentName));
-        if(priceComponentDto.isPresent()) {
+        if (priceComponentDto.isPresent()) {
             return priceComponentDto.get();
         } else {
             throw new IllegalArgumentException("The priceComponent doesn't exist");
@@ -50,14 +60,19 @@ public class PriceComponentServiceImpl implements PriceComponentService {
 
     @Override
     public Integer getPriceByComponentName(String componentName) {
-        return priceComponentRepository.findByName(componentName).get().getPrice();
+        Optional<PriceComponent> priceComponent = priceComponentRepository.findByName(componentName);
+        if(priceComponent.isPresent()){
+            return priceComponent.get().getPrice();
+        } else {
+            throw new NullPointerException("Base price doesn't set");
+        }
     }
 
     private PriceComponentDto convertPriceEntityToPriceDto(PriceComponent priceComponent) {
         return PriceComponentDto.builder().name(priceComponent.getName()).price(priceComponent.getPrice()).build();
     }
 
-    private  Optional<PriceComponentDto> convertPriceEntityToPriceDto(Optional<PriceComponent> priceComponent) {
+    private Optional<PriceComponentDto> convertPriceEntityToPriceDto(Optional<PriceComponent> priceComponent) {
         return priceComponent.isEmpty()
                 ? Optional.empty()
                 : Optional.of(convertPriceEntityToPriceDto(priceComponent.get()));

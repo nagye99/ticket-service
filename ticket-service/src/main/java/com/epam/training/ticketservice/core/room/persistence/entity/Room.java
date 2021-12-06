@@ -20,12 +20,12 @@ public class Room {
     private Integer id;
     @Column(unique = true)
     private String name;
-    private Integer rows;
-    private Integer columns;
+    private Integer roomRows;
+    private Integer roomColumns;
 
-    public Room(String name, Integer rows, Integer columns) {
+    public Room(String name, Integer roomRows, Integer roomColumns) {
         this.name = name;
-        this.rows = rows;
-        this.columns = columns;
+        this.roomRows = roomRows;
+        this.roomColumns = roomColumns;
     }
 }

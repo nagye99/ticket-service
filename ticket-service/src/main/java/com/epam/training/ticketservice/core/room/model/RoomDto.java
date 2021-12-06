@@ -7,14 +7,22 @@ import lombok.Data;
 @Builder
 public class RoomDto {
     private final String name;
-    private final Integer rows;
-    private final Integer columns;
+    private final Integer roomRows;
+    private final Integer roomColumns;
 
     private Integer getChairsNumber() {
-        return rows * columns;
+        return roomRows * roomColumns;
     }
 
     public String toString() {
-        return "Room " + name + " with " + getChairsNumber() + " seats, " + rows + " rows and " + columns + " columns";
+        return "Room "
+                + name
+                + " with "
+                + getChairsNumber()
+                + " seats, "
+                + roomRows
+                + " rows and "
+                + roomColumns
+                + " columns";
     }
 }

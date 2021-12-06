@@ -73,8 +73,8 @@ public class BookingServiceImpl implements BookingService {
     private Optional<String[]> isSeatInRoom(Integer screeningId, String seatsList) {
         String roomName = screeningService.getNameById(screeningId);
         RoomDto room = roomService.getRoomByName(roomName);//screeningService.getNameById(screeningId));
-        Integer rows = room.getRows();
-        Integer columns = room.getColumns();
+        Integer rows = room.getRoomRows();
+        Integer columns = room.getRoomColumns();
 
         List<String[]> seatPairs = Arrays.stream(seatsList.split(" "))
                 .map(seatPair -> seatPair.split(","))
@@ -82,7 +82,7 @@ public class BookingServiceImpl implements BookingService {
         return seatPairs
                 .stream()
                 .filter(seatPair -> Integer.valueOf(seatPair[0]) > rows || Integer.valueOf(seatPair[0]) < 1
-                        || Integer.valueOf(seatPair[1]) > columns || Integer.valueOf(seatPair[1]) < 0).findFirst();
+                        || Integer.valueOf(seatPair[1]) > columns || Integer.valueOf(seatPair[1]) < 1).findFirst();
     }
 
     private Optional<String> isSeatEnable(Integer screeningId, String seatsList) {

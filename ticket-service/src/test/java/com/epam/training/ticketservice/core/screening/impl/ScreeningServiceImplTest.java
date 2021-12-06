@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,8 +34,8 @@ class ScreeningServiceImplTest {
     private static final Room LOUMIER_ENTITY = new Room("Loumier", 20, 23);
     private static final RoomDto PEDERSOLI_DTO = RoomDto.builder()
             .name("Pedersoli")
-            .rows(10)
-            .columns(10)
+            .roomRows(10)
+            .roomColumns(10)
             .build();
 
     private static final Screening SCREENING_ENTITY = new Screening("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
@@ -43,6 +44,7 @@ class ScreeningServiceImplTest {
     private static final Screening SCREENING4_ENTITY = new Screening("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     private static final Screening SCREENING5_ENTITY = new Screening("It", "Pedersoli", LocalDateTime.parse("2021-12-10 11:40", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     private static final Screening SCREENING6_ENTITY = new Screening("It", "Pedersoli", LocalDateTime.parse("2021-12-10 11:45", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+    private static final Screening SCREENING7_ENTITY = new Screening(1, "It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     private static final ScreeningDto SCREENING_DTO = ScreeningDto.builder()
             .room(PEDERSOLI_DTO)
             .movie(IT_DTO)
@@ -80,7 +82,7 @@ class ScreeningServiceImplTest {
     private final ScreeningServiceImpl underTest = new ScreeningServiceImpl(screeningRepository, movieService, roomService);
 
     @Test
-    void testAddScreeningShouldThrowNullPointerExceptionWhenDateIsNull(){
+    void testAddScreeningShouldThrowNullPointerExceptionWhenDateIsNull() {
         // Given
         ScreeningDto screeningDto = ScreeningDto.builder()
                 .movie(IT_DTO)
@@ -93,7 +95,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningInAnotherScreeningDate(){
+    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningInAnotherScreeningDate() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of(SCREENING2_ENTITY));
         when(movieService.getMinutes("It")).thenReturn(Long.valueOf(135));
@@ -103,7 +105,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningBeforeInAnotherScreeningDate(){
+    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningBeforeInAnotherScreeningDate() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of(SCREENING3_ENTITY));
         when(movieService.getMinutes("It")).thenReturn(Long.valueOf(135));
@@ -113,7 +115,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningSameAnotherScreeningDate(){
+    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningSameAnotherScreeningDate() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of(SCREENING4_ENTITY));
         when(movieService.getMinutes("It")).thenReturn(Long.valueOf(135));
@@ -123,7 +125,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningInCleaning(){
+    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningInCleaning() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of(SCREENING5_ENTITY));
         when(movieService.getMinutes("It")).thenReturn(Long.valueOf(135));
@@ -133,7 +135,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningInCleaningStart(){
+    void testAddScreeningShouldThrowIllegalArgumentExceptionWhenScreeningInCleaningStart() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of(SCREENING6_ENTITY));
         when(movieService.getMinutes("It")).thenReturn(Long.valueOf(135));
@@ -143,7 +145,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testAddScreeningShouldCallScreeningRepositoryWhenTheInputDataIsCorrect(){
+    void testAddScreeningShouldCallScreeningRepositoryWhenTheInputDataIsCorrect() {
         // Given
         when(screeningRepository.findByRoomName(SCREENING_ENTITY.getRoomName())).thenReturn(List.of());
 
@@ -183,7 +185,7 @@ class ScreeningServiceImplTest {
     }
 
     @Test
-    void testListScreeningsShouldListScreenings(){
+    void testListScreeningsShouldListScreenings() {
 
         // Given
         when(screeningRepository.findAll()).thenReturn(List.of(SCREENING_ENTITY, SCREENING2_ENTITY, SCREENING3_ENTITY, SCREENING4_ENTITY, SCREENING5_ENTITY, SCREENING6_ENTITY));
@@ -197,5 +199,103 @@ class ScreeningServiceImplTest {
 
         // Then
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetScreeningIdShouldReturnInteger() {
+        // Given
+        when(screeningRepository.getScreeningByMovieTitleAndRoomNameAndDate("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))))
+                .thenReturn(java.util.Optional.of(SCREENING7_ENTITY));
+
+        Integer expected = 1;
+
+        // When
+        Integer actual = underTest.getScreeningId("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+
+        // Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetScreeningIdShouldThrowNullPointerException() {
+        // Given
+        when(screeningRepository.getScreeningByMovieTitleAndRoomNameAndDate("Ironman", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))))
+                .thenReturn(Optional.empty());
+
+        // When -Then
+        assertThrows(NullPointerException.class, () -> underTest.getScreeningId("Ironman", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+    }
+
+    @Test
+    void testGetNameByIdShouldReturnRoomName() {
+        //Given
+        when(screeningRepository.findById(1)).thenReturn(Optional.of(SCREENING_ENTITY));
+
+        String expected = "Pedersoli";
+
+        // When
+        String actual = underTest.getNameById(1);
+
+        //Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetNameByIdShouldThrowIllegalArgumentException() {
+        //Given
+        when(screeningRepository.findById(1)).thenReturn(Optional.empty());
+
+        // When - Then
+        assertThrows(IllegalArgumentException.class, () -> underTest.getNameById(1));
+    }
+
+    @Test
+    void testGetScreeningByIdShouldReturnScreeningDto() {
+        //Given
+        when(screeningRepository.findById(1)).thenReturn(Optional.of(SCREENING_ENTITY));
+        when(movieService.getMovieByTitle("It")).thenReturn(IT_DTO);
+        when(roomService.getRoomByName("Pedersoli")).thenReturn(PEDERSOLI_DTO);
+
+        ScreeningDto expected = SCREENING_DTO;
+
+        // When
+        ScreeningDto actual = underTest.getScreeningById(1);
+
+        //Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetScreeningByIdShouldThrowIllegalArgumentException() {
+        //Given
+        when(screeningRepository.findById(1)).thenReturn(Optional.empty());
+
+        // When - Then
+        assertThrows(IllegalArgumentException.class, () -> underTest.getScreeningById(1));
+    }
+
+    @Test
+    void testGetScreeningByTitleRoomAndDateShouldReturnScreeningDto() {
+        //Given
+        when(screeningRepository.getScreeningByMovieTitleAndRoomNameAndDate("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))).thenReturn(Optional.of(SCREENING_ENTITY));
+        when(movieService.getMovieByTitle("It")).thenReturn(IT_DTO);
+        when(roomService.getRoomByName("Pedersoli")).thenReturn(PEDERSOLI_DTO);
+
+        ScreeningDto expected = SCREENING_DTO;
+
+        // When
+        ScreeningDto actual = underTest.getScreeningByTitleRoomAndDate("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+
+        //Then
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetScreeningByTitleRoomAndDateShouldThrowIllegalArgumentException() {
+        //Given
+        when(screeningRepository.getScreeningByMovieTitleAndRoomNameAndDate("Ironman", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))).thenReturn(Optional.empty());
+
+        // When - Then
+        assertThrows(IllegalArgumentException.class, () -> underTest.getScreeningByTitleRoomAndDate("It", "Pedersoli", LocalDateTime.parse("2021-12-10 14:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
     }
 }

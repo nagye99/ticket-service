@@ -24,9 +24,9 @@ public class RoomServiceImpl implements RoomService {
     public void addRoom(RoomDto roomDto) {
         Objects.requireNonNull(roomDto, "Room cannot be null");
         Objects.requireNonNull(roomDto.getName(), "Name of the room cannot be null during saving!");
-        Objects.requireNonNull(roomDto.getColumns(), "Columns of chairs cannot be null during saving!");
-        Objects.requireNonNull(roomDto.getRows(), "Rows of chairs cannot be null during saving!");
-        Room room = new Room(roomDto.getName(), roomDto.getRows(), roomDto.getColumns());
+        Objects.requireNonNull(roomDto.getRoomColumns(), "Columns of chairs cannot be null during saving!");
+        Objects.requireNonNull(roomDto.getRoomRows(), "Rows of chairs cannot be null during saving!");
+        Room room = new Room(roomDto.getName(), roomDto.getRoomRows(), roomDto.getRoomColumns());
         roomRepository.save(room);
     }
 
@@ -34,13 +34,13 @@ public class RoomServiceImpl implements RoomService {
     public String updateRoom(RoomDto roomDto) {
         Objects.requireNonNull(roomDto, "Room cannot be null");
         Objects.requireNonNull(roomDto.getName(), "Name of the room cannot be null during update!");
-        Objects.requireNonNull(roomDto.getColumns(), "Columns of chairs cannot be null during update!");
-        Objects.requireNonNull(roomDto.getRows(), "Rows of chairs cannot be null during update!");
+        Objects.requireNonNull(roomDto.getRoomColumns(), "Columns of chairs cannot be null during update!");
+        Objects.requireNonNull(roomDto.getRoomRows(), "Rows of chairs cannot be null during update!");
         Optional<Room> roomOpt = roomRepository.findByName(roomDto.getName());
         if (roomOpt.isPresent()) {
             Room room = roomOpt.get();
-            room.setRows(roomDto.getRows());
-            room.setColumns(roomDto.getColumns());
+            room.setRoomRows(roomDto.getRoomRows());
+            room.setRoomColumns(roomDto.getRoomColumns());
             roomRepository.save(room);
             return roomDto + " is updated.";
         } else {
@@ -80,7 +80,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     private RoomDto convertRoomEntityToRoomDto(Room room) {
-        return RoomDto.builder().name(room.getName()).rows(room.getRows()).columns(room.getColumns()).build();
+        return RoomDto
+                .builder()
+                .name(room.getName()).roomRows(room.getRoomRows())
+                .roomColumns(room.getRoomColumns())
+                .build();
     }
 
     private Optional<RoomDto> convertRoomEntityToRoomDto(Optional<Room> room) {

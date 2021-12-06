@@ -77,13 +77,23 @@ public class ScreeningServiceImpl implements ScreeningService {
     @Override
     public String getNameById(Integer id) {
         Optional<Screening> screening = screeningRepository.findById(id);
-        return screening.get().getRoomName();
+        if (screening.isPresent()) {
+            return screening.get().getRoomName();
+        } else {
+            throw new IllegalArgumentException("Screening doesn't exist.");
+        }
     }
+
 
     @Override
     public ScreeningDto getScreeningById(Integer id) {
         Optional<Screening> screening = screeningRepository.findById(id);
-        return convertScreeningEntityToScreeningDto(screening).get();
+        Optional<ScreeningDto> screeningDto = convertScreeningEntityToScreeningDto(screening);
+        if (screeningDto.isPresent()) {
+            return screeningDto.get();
+        } else {
+            throw new IllegalArgumentException("Screening doesn't exist.");
+        }
     }
 
     @Override
@@ -112,9 +122,10 @@ public class ScreeningServiceImpl implements ScreeningService {
                         .getMinutes(screening.getMovieTitle()));
         return moviesStartAndEnd
                 .stream()
-                .anyMatch(startAndEnd -> (checkLocalDateBetween(screening.getDate(), startAndEnd.get(0),
-                        startAndEnd.get(1)) || checkLocalDateBetween(currentMovieEnd.plusMinutes(10),
-                        startAndEnd.get(0), LocalDateTime.MAX)));
+                .anyMatch(startAndEnd ->
+                        (checkDateBetween(startAndEnd.get(0), screening.getDate(), currentMovieEnd.plusMinutes(10))
+                                || checkDateBetween(startAndEnd.get(1),
+                                screening.getDate(), currentMovieEnd.plusMinutes(10))));
     }
 
     private boolean checkScreeningIsInCleaning(Screening screening) {
@@ -126,14 +137,11 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .collect(Collectors.toList());
         return cleanStartAndEnd
                 .stream()
-                .anyMatch(startAndEnd -> checkLocalDateBetween(screening.getDate(),
-                        startAndEnd.get(0),
-                        startAndEnd.get(1)));
+                .anyMatch(startAndEnd -> checkDateBetween(screening.getDate(), startAndEnd.get(0), startAndEnd.get(1)));
     }
 
-    private boolean checkLocalDateBetween(LocalDateTime currentDate, LocalDateTime startDate, LocalDateTime endDate) {
-        return (currentDate.isAfter(startDate) && currentDate.isBefore(endDate))
-                || currentDate.isEqual(startDate);
+    private boolean checkDateBetween(LocalDateTime currentDate, LocalDateTime startDate, LocalDateTime endDate) {
+        return (currentDate.isAfter(startDate) && currentDate.isBefore(endDate)) || currentDate.isEqual(startDate);
     }
 
     private ScreeningDto convertScreeningEntityToScreeningDto(Screening screening) {
