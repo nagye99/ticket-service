@@ -17,17 +17,10 @@ public class BookingDto {
 
     @Override
     public String toString() {
-        return "Seats "
-                + Stream.of(seats.split(" "))
-                .map(seatPair -> "(" + seatPair + ")")
-                .collect(Collectors.joining(", "))
-                + " on " + screening.getMovie().getTitle()
-                + " in room "
-                + screening.getRoom().getName()
-                + " starting at "
-                + screening.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-                + " for "
-                + price
-                + " HUF";
+        return "Seats " + Stream.of(seats.split(" ")).map(seatPair -> "(" + seatPair + ")")
+                .collect(Collectors.joining(", ")) + " on " + screening.getMovie().getTitle() + " in room "
+                + screening.getRoom().getName() + " starting at "
+                + screening.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + " for "
+                + price + " HUF";
     }
 }

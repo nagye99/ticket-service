@@ -123,7 +123,10 @@ public class ScreeningServiceImpl implements ScreeningService {
         return moviesStartAndEnd
                 .stream()
                 .anyMatch(startAndEnd ->
-                        (checkDateBetween(startAndEnd.get(0), screening.getDate(), currentMovieEnd.plusMinutes(10))
+                        (checkDateBetween(screening.getDate(), startAndEnd.get(0), startAndEnd.get(1))
+                                || checkDateBetween(startAndEnd.get(0),
+                                screening.getDate(),
+                                currentMovieEnd.plusMinutes(10))
                                 || checkDateBetween(startAndEnd.get(1),
                                 screening.getDate(), currentMovieEnd.plusMinutes(10))));
     }
@@ -141,7 +144,9 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     private boolean checkDateBetween(LocalDateTime currentDate, LocalDateTime startDate, LocalDateTime endDate) {
-        return currentDate.isEqual(startDate) || (currentDate.isAfter(startDate) && currentDate.isBefore(endDate));
+        return (currentDate.isBefore(endDate)
+                && currentDate.isAfter(startDate))
+                || currentDate.isEqual(startDate);
     }
 
     private ScreeningDto convertScreeningEntityToScreeningDto(Screening screening) {
